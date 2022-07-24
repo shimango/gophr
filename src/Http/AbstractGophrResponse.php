@@ -1,0 +1,158 @@
+<?php
+
+namespace Shimango\Gophr\Http;
+
+use Shimango\Gophr\DataTransferObjects\AbstractDataTransferObject;
+use Shimango\Gophr\Interfaces\GophrResponseInterface;
+use Psr\Http\Message\StreamInterface;
+use Spatie\DataTransferObject\DataTransferObjectError;
+
+abstract class AbstractGophrResponse implements GophrResponseInterface
+{
+    private StreamInterface $body;
+    private array $headers;
+    private int $httpStatusCode;
+    private string $reasonPhrase;
+    private string $protocolVersion = '1.1';
+    protected ?AbstractDataTransferObject $object;
+    protected array $contentsArray;
+
+    /**
+     * Creates a new Gophr HTTP response entity
+     * @param StreamInterface $body The body of the response
+     * @param int $httpStatusCode The returned status code
+     * @param array $headers The returned headers
+     */
+    public function __construct(StreamInterface $body, int $httpStatusCode, array $headers)
+    {
+        $this->body = $body;
+        $this->httpStatusCode = $httpStatusCode;
+        $this->headers = $headers;
+    }
+
+    /**
+     * Gets the decoded body of the HTTP response
+     * @return StreamInterface The decoded body
+     */
+    public function getBody(): StreamInterface
+    {
+        return $this->body;
+    }
+
+    /**
+     * Gets the status of the HTTP response
+     * @return int The HTTP status
+     */
+    public function getStatusCode(): int
+    {
+        return $this->httpStatusCode;
+    }
+
+    /**
+     * Gets the headers of the response
+     * @return array The response headers
+     */
+    public function getHeaders(): array
+    {
+        return $this->headers;
+    }
+
+    public function getProtocolVersion(): string
+    {
+        return $this->protocolVersion;
+    }
+
+    public function withProtocolVersion(string $version): GophrResponseInterface
+    {
+        $new = clone $this;
+        $new->protocolVersion = $version;
+        return $new;
+    }
+
+    public function hasHeader(string $name): bool
+    {
+        return isset($this->headers[$name]) ?? false;
+    }
+
+    public function getHeader(string $name): array
+    {
+        $value = $this->headers[$name] ?? null;
+
+        if (is_null($value)) {
+            return [];
+        }
+
+        return is_array($value) ? $value : [$value];
+    }
+
+    public function getHeaderLine(string $name): string
+    {
+        $headerLine = $this->headers[$name] ?? '';
+        return is_array($headerLine) ? implode(',', $headerLine) : $headerLine;
+    }
+
+    public function withHeader(string $name, array $value): GophrResponseInterface
+    {
+        $new = clone $this;
+        $new->headers[$name] = $value;
+        return $new;
+    }
+
+    public function withAddedHeader(string $name, array $value): GophrResponseInterface
+    {
+        $new = clone $this;
+        $new->headers[$name] = array_merge($this->headers[$name], $value);
+        return $new;
+    }
+
+    public function withoutHeader(string $name): GophrResponseInterface
+    {
+        $new = clone $this;
+        unset($new->headers[$name]);
+        return $new;
+    }
+
+    public function withBody(StreamInterface $body): GophrResponseInterface
+    {
+        $new = clone $this;
+        $new->body = $body;
+        return $new;
+    }
+
+    public function withStatus(int $code, string $reasonPhrase = ''): GophrResponseInterface
+    {
+        $new = clone $this;
+        $new->httpStatusCode = $code;
+        $new->reasonPhrase = $reasonPhrase;
+        return $new;
+    }
+
+    public function getReasonPhrase(): string
+    {
+        return $this->reasonPhrase;
+    }
+
+    public function getContentsArray(): array
+    {
+        if (!isset($this->contentsArray)) {
+            $this->contentsArray = json_decode($this->getBody()->getContents(), true) ?: [];
+        }
+
+        return $this->contentsArray;
+    }
+
+    protected function getDataTransferObject(string $className): ?AbstractDataTransferObject
+    {
+        if (!isset($this->object)) {
+            try {
+                /** @var AbstractDataTransferObject object */
+                $object = new $className($this->getContentsArray());
+                $this->object = $object;
+            } catch (DataTransferObjectError $e) {
+                $this->object = null;
+            }
+        }
+
+        return $this->object;
+    }
+}
