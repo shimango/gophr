@@ -1,6 +1,6 @@
 {
     "name": "shimango/gophr",
-    "description": "An unofficial client for the Gophr Courier Service commercial API",
+    "description": "An unofficial PHP client for the Gophr Courier Service commercial API",
     "keywords": ["shimango", "gophr"],
     "type": "library",
     "license": "MIT",
