@@ -1,11 +1,19 @@
-An unofficial client for the Gophr Courier Service commercial API
+An unofficial PHP client for the Gophr Courier Service commercial API
 ===============================
 Documentation regarding the Gophr Restfull API can be found at: https://developers.gophr.com/docs
+
+[![Build Status](https://github.com/shimango/gophr/actions/workflows/tests.yml/badge.svg?branch=master)](https://github.com/shimango/gophr/actions/workflows/tests.yml?query=branch%3Amaster)
+[![Latest Stable Version](http://poser.pugx.org/shimango/gophr/v)](https://packagist.org/packages/shimango/gophr)
+[![Total Downloads](http://poser.pugx.org/shimango/gophr/downloads)](https://packagist.org/packages/shimango/gophr)
+[![License](http://poser.pugx.org/shimango/gophr/license)](https://packagist.org/packages/shimango/gophr)
+[![PHP Version Require](http://poser.pugx.org/shimango/gophr/require/php)](https://packagist.org/packages/shimango/gophr)
+
 
 Requirements
 -----
 The Gophr Commercial API uses API Key based authentication. In order to use this client you need to obtain an API key 
 from Gophr. See how to obtain it here: https://developers.gophr.com/docs/authorisation 
+
 
 Installation
 -----
@@ -32,16 +40,15 @@ Usage
 -----
 The two main classes in this library are `Shimango\Gophr\Common\Configuration` and `Shimango\Gophr\Client`
 - The `Configuration` class is used to set all the variables required when making calls to the Rest API. The 
-configuration parameters are passed in the constructor of `Client` or can be set via setter methods. These are:
+configuration parameters are passed in the constructor of that class or can be set via setter methods. These are:
 ```php
-  * @param string   `$apiKey` - The API key obtained from Gophr
-  * @param bool     `$isSandbox` (Default `false`) - If true the Gophr sandbox environment will be used
-  * @param string   `$apiVersion` (Default `v2`) - The API version to be used. Currently, only v2 is supported
-  * @param int|null `$proxyPort` (Default `null`) - If the calls are sent via proxy the port number can be set here 
-  * @param bool     `$proxyVerifySSL` (Default `false`) - Sets verify proxy SSL to true if using a proxy is being used
+  * @param string   $apiKey - The API key obtained from Gophr
+  * @param bool     $isSandbox (Default `false`) - If true the Gophr sandbox environment will be used
+  * @param string   $apiVersion (Default `v2`) - The API version to be used. Currently, only v2 is supported
+  * @param int|null $proxyPort (Default `null`) - If the calls are sent via proxy the port number can be set here 
+  * @param bool     $proxyVerifySSL (Default `false`) - Sets verify proxy SSL to true if using a proxy is being used
 ```
-- The `Client` Is the main class in this library and has functions to allow for easy api calls to the Gophr commercial 
-API.
+- The `Client` is the main class in this library and has functions to allow for easy calls to the Gophr commercial API.
 Below are a couple of simple examples of how to query the gophr API for a list of jobs:
 ```php
 use Shimango\Gophr\Client;
@@ -91,9 +98,8 @@ CancelJob(string $jobId, array $jobData)
 listJobs(int $page = 1 ,int $count = 15, bool $include_finished = false)
 ````
 
-
 ### Deliveries
-A Delivery represent a pickup - dropoff combination along with any parcels that are associated with them. This library 
+A Delivery represents a pickup - dropoff combination along with any parcels that are associated with them. This library 
 provides the following methods to interact with Deliveries:
 ```php
 // Creates a delivery for an existing job. The delivery consists of a pickup, dropoff and collection of parcels.
@@ -129,7 +135,7 @@ getParcel(string $jobId, string $deliveryId, string $parcelId)
 // Note that updating parcels is not allowed once the job has been confirmed.
 updateParcel(string $jobId, string $deliveryId, string $parcelId, array $deliveryData)
 
-// Remove a parcel from a delivery. If the parcel count is 0 after deletion then the delivery will be cancelled.
+// Removes a parcel from a delivery. If the parcel count is 0 after deletion then the delivery will be cancelled.
 // Note that deleting parcels is not allowed once the job has been confirmed.
 deleteParcel(string $jobId, string $deliveryId, string $parcelId)
 
@@ -138,7 +144,8 @@ listParcels(string $jobId, string $deliveryId)
 ```
 
 All the methods above are available from the main `\Shimango\Gophr\Client` class. Alternatively, individual resources 
-can be used instead. The resource objects will only have the methods that affect that resource directly.  These are:
+can be used instead. The resource objects will only have the methods that affect that resource directly. These resources 
+are:
 - `\Shimango\Gophr\Resources\Job`
 - `\Shimango\Gophr\Resources\Delivery`
 - `\Shimango\Gophr\Resources\Parcel`
@@ -152,6 +159,7 @@ getContentsObject() // Returns the response body as an object
 
 ### Request and Response payloads
 Examples of the request and response payloads for each API call can be found at: https://developers.gophr.com/reference
+
 
 Test
 ----
