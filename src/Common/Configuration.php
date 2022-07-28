@@ -3,10 +3,8 @@ namespace Shimango\Gophr\Common;
 
 /**
  * Configuration Class
- *
- * @category Class
- * @package  Gophr
- * @author   jairo.kasmierchcki@gophr.it
+  * @category Class
+ * @package  Shimango\Gophr
  */
 class Configuration
 {
