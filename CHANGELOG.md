@@ -1,5 +1,8 @@
 # Changelog
 
+### 1.0.5
+- Updated the README file. Added badges.
+
 ### 1.0.4
 - Updated the README file
 
