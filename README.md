@@ -2,12 +2,6 @@ An unofficial PHP client for the Gophr Courier Service commercial API
 ===============================
 Documentation regarding the Gophr Restfull API can be found at: https://developers.gophr.com/docs
 
-[![Build Status](https://github.com/shimango/gophr/actions/workflows/tests.yml/badge.svg?branch=master)](https://github.com/shimango/gophr/actions/workflows/tests.yml?query=branch%3Amaster)
-[![Latest Stable Version](http://poser.pugx.org/shimango/gophr/v)](https://packagist.org/packages/shimango/gophr)
-[![Total Downloads](http://poser.pugx.org/shimango/gophr/downloads)](https://packagist.org/packages/shimango/gophr)
-[![License](http://poser.pugx.org/shimango/gophr/license)](https://packagist.org/packages/shimango/gophr)
-[![PHP Version Require](http://poser.pugx.org/shimango/gophr/require/php)](https://packagist.org/packages/shimango/gophr)
-
 
 Requirements
 -----
@@ -25,7 +19,7 @@ Or add the following to your composer.json file for your project:
 ```json
 {
     "require": {
-        "shimango/gophr": "^1"
+        "shimango/gophr": "^1.0.4"
     }
 }
 ```
@@ -42,11 +36,11 @@ The two main classes in this library are `Shimango\Gophr\Common\Configuration` a
 - The `Configuration` class is used to set all the variables required when making calls to the Rest API. The 
 configuration parameters are passed in the constructor of that class or can be set via setter methods. These are:
 ```php
-  * @param string   $apiKey - The API key obtained from Gophr
-  * @param bool     $isSandbox (Default `false`) - If true the Gophr sandbox environment will be used
-  * @param string   $apiVersion (Default `v2`) - The API version to be used. Currently, only v2 is supported
-  * @param int|null $proxyPort (Default `null`) - If the calls are sent via proxy the port number can be set here 
-  * @param bool     $proxyVerifySSL (Default `false`) - Sets verify proxy SSL to true if using a proxy is being used
+  @param string   $apiKey - The API key obtained from Gophr
+  @param bool     $isSandbox (Default false) - If true the Gophr sandbox environment will be used
+  @param string   $apiVersion (Default "v2") - The API version to be used. Currently, only v2 is supported
+  @param int|null $proxyPort (Default null) - If the calls are sent via proxy the port number can be set here 
+  @param bool     $proxyVerifySSL (Default false) - Sets verify proxy SSL to true if using a proxy is being used
 ```
 - The `Client` is the main class in this library and has functions to allow for easy calls to the Gophr commercial API.
 Below are a couple of simple examples of how to query the gophr API for a list of jobs:
