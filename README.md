@@ -2,6 +2,12 @@ An unofficial PHP client for the Gophr Courier Service commercial API
 ===============================
 Documentation regarding the Gophr Restfull API can be found at: https://developers.gophr.com/docs
 
+[![Build Status](https://github.com/shimango/gophr/actions/workflows/tests.yml/badge.svg?branch=master)](https://github.com/shimango/gophr/actions/workflows/tests.yml?query=branch%3Amaster)
+[![Latest Stable Version](http://poser.pugx.org/shimango/gophr/v)](https://packagist.org/packages/shimango/gophr)
+[![Total Downloads](http://poser.pugx.org/shimango/gophr/downloads)](https://packagist.org/packages/shimango/gophr)
+[![License](http://poser.pugx.org/shimango/gophr/license)](https://packagist.org/packages/shimango/gophr)
+[![PHP Version Require](http://poser.pugx.org/shimango/gophr/require/php)](https://packagist.org/packages/shimango/gophr)
+
 
 Requirements
 -----
@@ -19,7 +25,7 @@ Or add the following to your composer.json file for your project:
 ```json
 {
     "require": {
-        "shimango/gophr": "^1.0.4"
+        "shimango/gophr": "^1.0.5"
     }
 }
 ```
