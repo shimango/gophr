@@ -1,5 +1,8 @@
 # Changelog
 
+### 1.0.6
+- Tested on PHP 8.0 and 8.1
+
 ### 1.0.5
 - Updated the README file. Added badges.
 
