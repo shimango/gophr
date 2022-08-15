@@ -1,4 +1,4 @@
-An unofficial PHP client for the Gophr Courier Service commercial API
+A PHP client for the Gophr Courier Service commercial API
 ===============================
 Documentation regarding the Gophr Restfull API can be found at: https://developers.gophr.com/docs
 
@@ -25,7 +25,7 @@ Or add the following to your composer.json file for your project:
 ```json
 {
     "require": {
-        "shimango/gophr": "^1.0.5"
+        "shimango/gophr": "^1.0.6"
     }
 }
 ```
