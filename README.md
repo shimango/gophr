@@ -1,4 +1,4 @@
-An unofficial PHP client for the Gophr Courier Service commercial API
+A PHP client for the Gophr Courier Service commercial API
 ===============================
 Documentation regarding the Gophr Restfull API can be found at: https://developers.gophr.com/docs
 
