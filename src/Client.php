@@ -241,7 +241,7 @@ class Client
     }
 
     /**
-     * Progresses a delivery status. This functionality is only available on the Sandbox server.
+     * Progresses a delivery status. This functionality is not available in production.
      * @param string $jobId The id of the parent job
      * @param string $deliveryId The id of the delivery
      * @return progressDeliveryStatusResponse

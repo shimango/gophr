@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.0.7
+- Added method to progress delivery statuses
+- Some code Refactoring
+
 ### 1.0.6
 - Tested on PHP 8.0 and 8.1
 
