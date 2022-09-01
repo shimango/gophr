@@ -2,13 +2,13 @@
 
 namespace Shimango\Gophr\Http\Responses\Parcels;
 
-use Shimango\Gophr\DataTransferObjects\Response\Parcels\CreateParcelsResponseDto;
+use Shimango\Gophr\DataTransferObjects\Response\Parcels\CreateParcelResponseDto;
 use Shimango\Gophr\Http\AbstractGophrResponse;
 
 class CreateParcelResponse extends AbstractGophrResponse
 {
-    public function getContentsObject(): ?CreateParcelsResponseDto
+    public function getContentsObject(): ?CreateParcelResponseDto
     {
-        return parent::getDataTransferObject(CreateParcelsResponseDto::class);
+        return parent::getDataTransferObject(CreateParcelResponseDto::class);
     }
 }

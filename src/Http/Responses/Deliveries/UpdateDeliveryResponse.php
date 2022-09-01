@@ -2,13 +2,13 @@
 
 namespace Shimango\Gophr\Http\Responses\Deliveries;
 
-use Shimango\Gophr\DataTransferObjects\Response\Deliveries\UpdateDeliveriesResponseDto;
+use Shimango\Gophr\DataTransferObjects\Response\Deliveries\UpdateDeliveryResponseDto;
 use Shimango\Gophr\Http\AbstractGophrResponse;
 
 class UpdateDeliveryResponse extends AbstractGophrResponse
 {
-    public function getContentsObject(): ?UpdateDeliveriesResponseDto
+    public function getContentsObject(): ?UpdateDeliveryResponseDto
     {
-        return parent::getDataTransferObject(UpdateDeliveriesResponseDto::class);
+        return parent::getDataTransferObject(UpdateDeliveryResponseDto::class);
     }
 }
