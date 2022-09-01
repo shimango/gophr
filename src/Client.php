@@ -10,6 +10,7 @@ use Shimango\Gophr\Http\Responses\Deliveries\CancelDeliveryResponse;
 use Shimango\Gophr\Http\Responses\Deliveries\CreateDeliveryResponse;
 use Shimango\Gophr\Http\Responses\Deliveries\GetDeliveryResponse;
 use Shimango\Gophr\Http\Responses\Deliveries\ListDeliveriesResponse;
+use Shimango\Gophr\Http\Responses\Deliveries\ProgressDeliveryStatusResponse;
 use Shimango\Gophr\Http\Responses\Deliveries\UpdateDeliveryResponse;
 use Shimango\Gophr\Http\Responses\Jobs\CancelJobResponse;
 use Shimango\Gophr\Http\Responses\Jobs\CreateJobResponse;
@@ -107,7 +108,6 @@ class Client
     {
         return $this->resourceFactory->makeJobResource($this->configuration)->listJobs($page, $count, $include_finished);
     }
-
 
     /**
      * Gets a delivery
@@ -238,5 +238,17 @@ class Client
     public function deleteParcel(string $jobId, string $deliveryId, string $parcelId): DeleteParcelResponse
     {
         return $this->resourceFactory->makeParcelResource($this->configuration)->deleteParcel($jobId, $deliveryId, $parcelId);
+    }
+
+    /**
+     * Progresses a delivery status. This functionality is not available in production.
+     * @param string $jobId The id of the parent job
+     * @param string $deliveryId The id of the delivery
+     * @return progressDeliveryStatusResponse
+     * @throws GophrException
+     */
+    public function progressDeliveryStatus(string $jobId, string $deliveryId): progressDeliveryStatusResponse
+    {
+        return $this->resourceFactory->makeDeliveryResource($this->configuration)->progressDeliveryStatus($jobId, $deliveryId);
     }
 }

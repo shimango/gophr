@@ -25,7 +25,7 @@ Or add the following to your composer.json file for your project:
 ```json
 {
     "require": {
-        "shimango/gophr": "^1.0.6"
+        "shimango/gophr": "^1.0.7"
     }
 }
 ```
@@ -118,6 +118,9 @@ listDeliveries(string $jobId)
 
 // Cancels a delivery. Note that cancelling deliveries is not allowed once the job has been confirmed.
 cancelDelivery(string $jobId, string $deliveryId, array $deliveryData)
+
+// Progresses a delivery status. This functionality is not available in production.
+progressDeliveryStatus(string $jobId, string $deliveryId)
 ```
 
 ### Parcels

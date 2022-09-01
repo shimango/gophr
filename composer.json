@@ -1,7 +1,7 @@
 {
     "name": "shimango/gophr",
     "description": "A PHP client for the Gophr Courier Service commercial API",
-    "keywords": ["shimango", "gophr"],
+    "keywords": ["shimango", "gophr", "courier", "last-mile", "delivery"],
     "type": "library",
     "license": "MIT",
     "authors": [

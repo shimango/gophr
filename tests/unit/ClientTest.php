@@ -6,6 +6,7 @@ use Shimango\Gophr\Http\Responses\Deliveries\CancelDeliveryResponse;
 use Shimango\Gophr\Http\Responses\Deliveries\CreateDeliveryResponse;
 use Shimango\Gophr\Http\Responses\Deliveries\GetDeliveryResponse;
 use Shimango\Gophr\Http\Responses\Deliveries\ListDeliveriesResponse;
+use Shimango\Gophr\Http\Responses\Deliveries\ProgressDeliveryStatusResponse;
 use Shimango\Gophr\Http\Responses\Deliveries\UpdateDeliveryResponse;
 use Shimango\Gophr\Http\Responses\Jobs\CancelJobResponse;
 use Shimango\Gophr\Http\Responses\Jobs\CreateJobResponse;
@@ -60,7 +61,6 @@ class ClientTest extends BaseTest
     }
 
     /**
-
      * @return void
      * @throws GophrException
      */
@@ -74,7 +74,6 @@ class ClientTest extends BaseTest
     }
 
     /**
-
      * @return void
      * @throws GophrException
      */
@@ -88,7 +87,6 @@ class ClientTest extends BaseTest
     }
 
     /**
-
      * @return void
      * @throws GophrException
      */
@@ -100,7 +98,6 @@ class ClientTest extends BaseTest
     }
 
     /**
-
      * @return void
      * @throws GophrException
      */
@@ -114,7 +111,6 @@ class ClientTest extends BaseTest
     /** ************************************************************************************************************* */
 
     /**
-
      * @return void
      * @throws GophrException
      */
@@ -128,7 +124,6 @@ class ClientTest extends BaseTest
     }
 
     /**
-
      * @return void
      * @throws GophrException
      */
@@ -142,7 +137,6 @@ class ClientTest extends BaseTest
     }
 
     /**
-
      * @return void
      * @throws GophrException
      */
@@ -157,7 +151,6 @@ class ClientTest extends BaseTest
     }
 
     /**
-
      * @return void
      * @throws GophrException
      */
@@ -172,7 +165,6 @@ class ClientTest extends BaseTest
     }
 
     /**
-
      * @return void
      * @throws GophrException
      */
@@ -184,10 +176,22 @@ class ClientTest extends BaseTest
         $this->assertInstanceOf(ListDeliveriesResponse::class, $response);
     }
 
+    /**
+     * @return void
+     * @throws GophrException
+     */
+    public function testProgressDeliveryStatus(): void
+    {
+        $jobId = '12ab3c';
+        $deliveryId = 'def456';
+        $client = $this->getClientForDeliveryTest('create', ProgressDeliveryStatusResponse::class, "/v2-commercial-api/jobs/{$jobId}/deliveries/{$deliveryId}/progress");
+        $response = $client->progressDeliveryStatus($jobId, $deliveryId);
+        $this->assertInstanceOf(ProgressDeliveryStatusResponse::class, $response);
+    }
+
     /** ************************************************************************************************************* */
 
     /**
-
      * @return void
      * @throws GophrException
      */

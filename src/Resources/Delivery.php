@@ -7,6 +7,7 @@ use Shimango\Gophr\Http\Responses\Deliveries\CancelDeliveryResponse;
 use Shimango\Gophr\Http\Responses\Deliveries\CreateDeliveryResponse;
 use Shimango\Gophr\Http\Responses\Deliveries\GetDeliveryResponse;
 use Shimango\Gophr\Http\Responses\Deliveries\ListDeliveriesResponse;
+use Shimango\Gophr\Http\Responses\Deliveries\ProgressDeliveryStatusResponse;
 use Shimango\Gophr\Http\Responses\Deliveries\UpdateDeliveryResponse;
 
 /**
@@ -88,6 +89,21 @@ class Delivery extends AbstractResource
         $apiEndPoint = $this->request->getEndpoint() . "/jobs/{$jobId}/deliveries/{$deliveryId}/cancel";
         /** @var CancelDeliveryResponse $response */
         $response = $this->create($apiEndPoint, $deliveryData, CancelDeliveryResponse::class);
+        return $response;
+    }
+
+    /**
+     * Progresses a delivery status. This functionality is only available on the sandbox server.
+     * @param string $jobId
+     * @param string $deliveryId
+     * @return progressDeliveryStatusResponse
+     * @throws InvalidReturnTypeException
+     */
+    public function progressDeliveryStatus(string $jobId, string $deliveryId): progressDeliveryStatusResponse
+    {
+        $apiEndPoint = $this->request->getEndpoint() . "/jobs/{$jobId}/deliveries/{$deliveryId}/progress";
+        /** @var progressDeliveryStatusResponse $response */
+        $response = $this->create($apiEndPoint, [],progressDeliveryStatusResponse::class);
         return $response;
     }
 }
