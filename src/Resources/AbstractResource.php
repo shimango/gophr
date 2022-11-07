@@ -76,4 +76,18 @@ abstract class AbstractResource
     {
         return $this->request->setEndpoint($endPoint)->setReturnType($dtoResponseClass)->execute(self::REQUEST_DELETE);
     }
+
+    /**
+     * Given a key value array, this function generates a URL-encoded query string from its contents.
+     * @param array $parameters
+     * @return string
+     */
+    protected function generateUrlParameters(array $parameters = []): string
+    {
+        if ($xdebugSession = getenv('XDEBUG_SESSION')) {
+            $parameters['XDEBUG_SESSION'] = $xdebugSession;
+        }
+
+        return !empty($parameters) ? sprintf('?%s', http_build_query($parameters)) : '';
+    }
 }

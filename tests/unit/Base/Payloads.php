@@ -5,6 +5,8 @@ use DateTimeInterface;
 
 class Payloads
 {
+	public const MULTI_JOB_TYPE_MASTER_MULTI_DROP = 112;
+	
     private static function getParcelExternalId(bool $increment = false): string
     {
         static $parcel_external_id = 1;
@@ -29,6 +31,7 @@ class Payloads
         $defaultValues = [
             "vehicle_type" => 40,
             "is_confirmed" => 0,
+            "multi_job_type" => self::MULTI_JOB_TYPE_MASTER_MULTI_DROP,
             "pickups" => [
                 self::getJobPickup(['sequence_number' => self::getSequenceNumber()]),
             ],
