@@ -44,7 +44,7 @@ class Payloads
             ]
         ];
 
-        return array_merge($customValues, $defaultValues);
+        return array_merge($defaultValues, $customValues);
     }
 
     public static function getUpdateJobPayload(array $customValues = []): array
@@ -53,7 +53,7 @@ class Payloads
             'is_confirmed' => 1
         ];
 
-        return array_merge($customValues, $defaultValues);
+        return array_merge($defaultValues, $customValues);
     }
 
     public static function getCancelJobPayload(array $customValues = []): array
@@ -63,7 +63,7 @@ class Payloads
             'cancelled_comment' => 'Order was placed by mistake',
         ];
 
-        return array_merge($customValues, $defaultValues);
+        return array_merge($defaultValues, $customValues);
     }
 
     public static function getCancelDeliveryPayload(array $customValues = []): array
@@ -73,7 +73,7 @@ class Payloads
             'cancelled_comment' => 'Order was placed by mistake',
         ];
 
-        return array_merge($customValues, $defaultValues);
+        return array_merge($defaultValues, $customValues);
     }
 
     public static function getCreateDeliveryPayload(array $customValues = []): array
@@ -86,7 +86,7 @@ class Payloads
             ]
         ];
 
-        return array_merge($customValues, $defaultValues);
+        return array_merge($defaultValues, $customValues);
     }
 
     public static function getUpdateDeliveryPayload(array $customValues = []): array
@@ -130,14 +130,14 @@ class Payloads
     public static function getUpdateParcelPayload(array $customValues = []): array
     {
         $defaultValues = self::getCreateParcelPayload(['parcel_description' => 'Updated parcel']);
-        return array_merge($customValues, $defaultValues);
+        return array_merge($defaultValues, $customValues);
     }
 
     public static function getJobPickup(array $customValues = []): array
     {
         $defaultValues = [
-            "earliest_pickup_time" => (new \DateTime())->format(DateTimeInterface::ATOM),
-            "pickup_deadline" => (new \DateTime())->add(new \DateInterval('PT2H'))->format(DateTimeInterface::ATOM),
+            "earliest_pickup_time" => (new \DateTime('tomorrow noon'))->format(DateTimeInterface::ATOM),
+            "pickup_deadline" => (new \DateTime('tomorrow noon'))->add(new \DateInterval('PT2H'))->format(DateTimeInterface::ATOM),
             "pickup_address1" => "Riverside Building, County Hall",
             "pickup_city" => "London",
             "pickup_postcode" => "SE1 7PB",
@@ -157,7 +157,7 @@ class Payloads
             ]
         ];
 
-        return array_merge($customValues, $defaultValues);
+        return array_merge($defaultValues, $customValues);
     }
 
     public static function getJobDropoff(array $customValues = []): array
@@ -176,8 +176,8 @@ class Payloads
             "dropoff_email" => "jnglis@test.com",
             "dropoff_mobile_number" => "07766663666",
             "dropoff_phone_number" => "07735555555",
-            "earliest_dropoff_time" => (new \DateTime())->add(new \DateInterval('PT2H'))->format(DateTimeInterface::ATOM),
-            "dropoff_deadline" => (new \DateTime())->add(new \DateInterval('PT4H'))->format(DateTimeInterface::ATOM),
+            "earliest_dropoff_time" => (new \DateTime('tomorrow noon'))->add(new \DateInterval('PT2H'))->format(DateTimeInterface::ATOM),
+            "dropoff_deadline" => (new \DateTime('tomorrow noon'))->add(new \DateInterval('PT4H'))->format(DateTimeInterface::ATOM),
             "dropoff_proof_required" => 0,
             "cold_chain" => 0,
             "is_final_dropoff" => 0,
@@ -190,15 +190,15 @@ class Payloads
             ]
         ];
 
-        return array_merge($customValues, $defaultValues);
+        return array_merge($defaultValues, $customValues);
     }
 
     public static function getDeliveryPickup(array $customValues = []): array
     {
         $defaultValues = [
             "pickup_proof_required" => 1,
-            "earliest_pickup_time" => (new \DateTime())->format(DateTimeInterface::ATOM),
-            "pickup_deadline" => (new \DateTime())->add(new \DateInterval('PT2H'))->format(DateTimeInterface::ATOM),
+            "earliest_pickup_time" => (new \DateTime('tomorrow noon'))->format(DateTimeInterface::ATOM),
+            "pickup_deadline" => (new \DateTime('tomorrow noon'))->add(new \DateInterval('PT2H'))->format(DateTimeInterface::ATOM),
             "pickup_address1" => "Riverside Building, County Hall",
             "pickup_address2" => "Flat 6",
             "pickup_city" => "London",
@@ -216,7 +216,7 @@ class Payloads
             "pickup_instructions" => "Doorbell doesn't work. Please knock door."
         ];
 
-        return array_merge($customValues, $defaultValues);
+        return array_merge($defaultValues, $customValues);
     }
 
     public static function getDeliveryDropoff(array $customValues = []): array
@@ -239,8 +239,8 @@ class Payloads
             "dropoff_mobile_number" => "07766666666",
             "dropoff_phone_number" => "07755555555",
             "dropoff_instructions" => "Please leave at front door.",
-            "earliest_dropoff_time" => (new \DateTime())->add(new \DateInterval('PT4H'))->format(DateTimeInterface::ATOM),
-            "dropoff_deadline" => (new \DateTime())->add(new \DateInterval('PT5H'))->format(DateTimeInterface::ATOM),
+            "earliest_dropoff_time" => (new \DateTime('tomorrow noon'))->add(new \DateInterval('PT4H'))->format(DateTimeInterface::ATOM),
+            "dropoff_deadline" => (new \DateTime('tomorrow noon'))->add(new \DateInterval('PT5H'))->format(DateTimeInterface::ATOM),
             "cold_chain" => 60,
             "sequence_number" => 1
         ];
