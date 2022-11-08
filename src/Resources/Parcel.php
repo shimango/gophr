@@ -26,7 +26,7 @@ class Parcel extends AbstractResource
      */
     public function createParcel(string $jobId, string $deliveryId, array $parcelData): CreateParcelResponse
     {
-        $apiEndPoint = $this->request->getEndpoint() . "/jobs/{$jobId}/deliveries/{$deliveryId}/parcels";
+        $apiEndPoint = $this->request->getEndpoint() . "/jobs/{$jobId}/deliveries/{$deliveryId}/parcels" . $this->generateUrlParameters();
         /** @var CreateParcelResponse $response */
         $response = $this->create($apiEndPoint, $parcelData, CreateParcelResponse::class);
         return $response;
@@ -42,7 +42,7 @@ class Parcel extends AbstractResource
      */
     public function getParcel(string $jobId, string $deliveryId, string $parcelId): GetParcelResponse
     {
-        $apiEndPoint = $this->request->getEndpoint() . "/jobs/{$jobId}/deliveries/{$deliveryId}/parcels/{$parcelId}";
+        $apiEndPoint = $this->request->getEndpoint() . "/jobs/{$jobId}/deliveries/{$deliveryId}/parcels/{$parcelId}" . $this->generateUrlParameters();
         /** @var GetParcelResponse $response */
         $response = $this->read($apiEndPoint, GetParcelResponse::class);
         return $response;
@@ -59,7 +59,7 @@ class Parcel extends AbstractResource
      */
     public function updateParcel(string $jobId, string $deliveryId, string $parcelId, array $deliveryData): UpdateParcelResponse
     {
-        $apiEndPoint = $this->request->getEndpoint() . "/jobs/{$jobId}/deliveries/{$deliveryId}/parcels/{$parcelId}";
+        $apiEndPoint = $this->request->getEndpoint() . "/jobs/{$jobId}/deliveries/{$deliveryId}/parcels/{$parcelId}" . $this->generateUrlParameters();
         /** @var UpdateParcelResponse $response */
         $response = $this->update($apiEndPoint, $deliveryData, UpdateParcelResponse::class);
         return $response;
@@ -75,7 +75,7 @@ class Parcel extends AbstractResource
      */
     public function deleteParcel(string $jobId, string $deliveryId, string $parcelId): DeleteParcelResponse
     {
-        $apiEndPoint = $this->request->getEndpoint() . "/jobs/{$jobId}/deliveries/{$deliveryId}/parcels/{$parcelId}";
+        $apiEndPoint = $this->request->getEndpoint() . "/jobs/{$jobId}/deliveries/{$deliveryId}/parcels/{$parcelId}" . $this->generateUrlParameters();
         /** @var DeleteParcelResponse $response */
         $response = $this->delete($apiEndPoint, DeleteParcelResponse::class);
         return $response;
@@ -90,7 +90,7 @@ class Parcel extends AbstractResource
      */
     public function listParcels(string $jobId, string $deliveryId): ListParcelsResponse
     {
-        $apiEndPoint = $this->request->getEndpoint() . "/jobs/{$jobId}/deliveries/{$deliveryId}/parcels";
+        $apiEndPoint = $this->request->getEndpoint() . "/jobs/{$jobId}/deliveries/{$deliveryId}/parcels" . $this->generateUrlParameters();
         /** @var ListParcelsResponse $response */
         $response = $this->read($apiEndPoint, ListParcelsResponse::class);
         return $response;
