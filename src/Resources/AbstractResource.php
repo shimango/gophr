@@ -84,8 +84,8 @@ abstract class AbstractResource
      */
     protected function generateUrlParameters(array $parameters = []): string
     {
-        if ($xdebugSession = getenv('XDEBUG_SESSION')) {
-            $parameters['XDEBUG_SESSION'] = $xdebugSession;
+        if ($xdebugSession = getenv('GOPHR_XDEBUG_SESSION')) {
+            $parameters['GOPHR_XDEBUG_SESSION'] = $xdebugSession;
         }
 
         return !empty($parameters) ? sprintf('?%s', http_build_query($parameters)) : '';
