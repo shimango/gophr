@@ -1,5 +1,8 @@
 # Changelog
 
+### 1.0.8
+- Fixed issues with test payloads date times
+
 ### 1.0.7
 - Added method to progress delivery statuses
 - Some code Refactoring
