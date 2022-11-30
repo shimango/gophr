@@ -1,5 +1,8 @@
 # Changelog
 
+### 1.0.9
+- Fixed wrong Xdebug session key
+
 ### 1.0.8
 - Fixed issues with test payloads date times
 
