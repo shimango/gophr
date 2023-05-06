@@ -6,12 +6,10 @@ use Shimango\Gophr\Common\Configuration;
 use Shimango\Gophr\Exceptions\GophrException;
 use Shimango\Gophr\Http\GophrRequest;
 
-class RequestFactory
+final class RequestFactory
 {
     /**
      * Makes a Gophr request
-     * @param Configuration $configuration
-     * @return GophrRequest
      * @throws GophrException
      */
     public static function makeGophrRequest(Configuration $configuration): GophrRequest

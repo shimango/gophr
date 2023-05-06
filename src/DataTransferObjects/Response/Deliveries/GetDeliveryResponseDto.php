@@ -5,7 +5,7 @@ namespace Shimango\Gophr\DataTransferObjects\Response\Deliveries;
 use Shimango\Gophr\DataTransferObjects\AbstractDataTransferObject;
 use Shimango\Gophr\DataTransferObjects\Items\Response\Deliveries\GetDeliveryDto;
 
-class GetDeliveryResponseDto extends AbstractDataTransferObject
+final class GetDeliveryResponseDto extends AbstractDataTransferObject
 {
-    public ?GetDeliveryDto $data;
+    public ?GetDeliveryDto $data = null;
 }

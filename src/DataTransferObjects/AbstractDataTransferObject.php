@@ -5,15 +5,18 @@ namespace Shimango\Gophr\DataTransferObjects;
 use Shimango\Gophr\Interfaces\DataTransferObjectInterface;
 use Spatie\DataTransferObject\DataTransferObject;
 
-class AbstractDataTransferObject extends DataTransferObject implements DataTransferObjectInterface
+abstract class AbstractDataTransferObject extends DataTransferObject implements DataTransferObjectInterface
 {
-    private array $floatFields = [
+    /**
+     * @var string[]
+     */
+    private const FLOAT_FIELDS = [
         'amount', 'distance'
     ];
 
     public function __construct(array $parameters = [])
     {
-        foreach ($this->floatFields as $floatField) {
+        foreach (self::FLOAT_FIELDS as $floatField) {
             if (isset($parameters[$floatField]) && is_int($parameters[$floatField])) {
                 $parameters[$floatField] = (float)$parameters[$floatField];
             }

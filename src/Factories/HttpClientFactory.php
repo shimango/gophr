@@ -4,7 +4,7 @@ namespace Shimango\Gophr\Factories;
 
 use GuzzleHttp\Client;
 
-class HttpClientFactory
+final class HttpClientFactory
 {
     /**
      * Creates a new Guzzle client. To allow for user flexibility, the client is not reused. This allows the user to set

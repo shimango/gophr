@@ -1,6 +1,7 @@
 <?php
 namespace Shimango\Gophr\Tests\Unit\Base;
 
+use DG\BypassFinals;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use ReflectionException;
@@ -18,6 +19,12 @@ abstract class BaseTest extends TestCase
     {
         parent::__construct($name, $data, $dataName);
         $this->mockFactory = new MockFactory();
+    }
+
+    public function setUp(): void
+    {
+        parent::setUp();
+        BypassFinals::enable();
     }
 
     /**
@@ -56,7 +63,7 @@ abstract class BaseTest extends TestCase
 
         $mockGophrResponse = $this->mockFactory->getMockedObject($responseClass);
 
-        $mockJobResource = $this->mockFactory->getMockedObject($resourceClass, ['request' => $gophrRequest], [$verb => $mockGophrResponse]);
+        $mockJobResource = $this->mockFactory->getMockedObject($resourceClass, ['gophrRequest' => $gophrRequest], [$verb => $mockGophrResponse]);
         $functionArgs = ['apiEndPoint' => $expectedApiEndPoint];
         if ($data) {
             $functionArgs[$dataParamName[$resourceClass]] = $data;

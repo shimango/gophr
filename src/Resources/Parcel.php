@@ -14,35 +14,27 @@ use Shimango\Gophr\Http\Responses\Parcels\UpdateParcelResponse;
  * can have many parcels.
  * @package Shimango\Gophr\Resources
  */
-class Parcel extends AbstractResource
+final class Parcel extends AbstractResource
 {
     /**
      * Creates a parcel
-     * @param string $jobId
-     * @param string $deliveryId
-     * @param array $parcelData
-     * @return CreateParcelResponse
      * @throws InvalidReturnTypeException
      */
     public function createParcel(string $jobId, string $deliveryId, array $parcelData): CreateParcelResponse
     {
-        $apiEndPoint = $this->request->getEndpoint() . "/jobs/{$jobId}/deliveries/{$deliveryId}/parcels" . $this->generateUrlParameters();
-        /** @var CreateParcelResponse $response */
-        $response = $this->create($apiEndPoint, $parcelData, CreateParcelResponse::class);
-        return $response;
+        $apiEndPoint = $this->gophrRequest->getEndpoint() . sprintf('/jobs/%s/deliveries/%s/parcels', $jobId, $deliveryId) . $this->generateUrlParameters();
+        /** @var CreateParcelResponse $gophrResponse */
+        $gophrResponse = $this->create($apiEndPoint, $parcelData, CreateParcelResponse::class);
+        return $gophrResponse;
     }
 
     /**
      * Gets a parcel
-     * @param string $jobId
-     * @param string $deliveryId
-     * @param string $parcelId
-     * @return GetParcelResponse
      * @throws InvalidReturnTypeException
      */
     public function getParcel(string $jobId, string $deliveryId, string $parcelId): GetParcelResponse
     {
-        $apiEndPoint = $this->request->getEndpoint() . "/jobs/{$jobId}/deliveries/{$deliveryId}/parcels/{$parcelId}" . $this->generateUrlParameters();
+        $apiEndPoint = $this->gophrRequest->getEndpoint() . sprintf('/jobs/%s/deliveries/%s/parcels/%s', $jobId, $deliveryId, $parcelId) . $this->generateUrlParameters();
         /** @var GetParcelResponse $response */
         $response = $this->read($apiEndPoint, GetParcelResponse::class);
         return $response;
@@ -50,47 +42,35 @@ class Parcel extends AbstractResource
 
     /**
      * Updates a parcel
-     * @param string $jobId
-     * @param string $deliveryId
-     * @param string $parcelId
-     * @param array $deliveryData
-     * @return UpdateParcelResponse
      * @throws InvalidReturnTypeException
      */
     public function updateParcel(string $jobId, string $deliveryId, string $parcelId, array $deliveryData): UpdateParcelResponse
     {
-        $apiEndPoint = $this->request->getEndpoint() . "/jobs/{$jobId}/deliveries/{$deliveryId}/parcels/{$parcelId}" . $this->generateUrlParameters();
-        /** @var UpdateParcelResponse $response */
-        $response = $this->update($apiEndPoint, $deliveryData, UpdateParcelResponse::class);
-        return $response;
+        $apiEndPoint = $this->gophrRequest->getEndpoint() . sprintf('/jobs/%s/deliveries/%s/parcels/%s', $jobId, $deliveryId, $parcelId) . $this->generateUrlParameters();
+        /** @var UpdateParcelResponse $gophrResponse */
+        $gophrResponse = $this->update($apiEndPoint, $deliveryData, UpdateParcelResponse::class);
+        return $gophrResponse;
     }
 
     /**
      * deletes a parcel
-     * @param string $jobId
-     * @param string $deliveryId
-     * @param string $parcelId
-     * @return DeleteParcelResponse
      * @throws InvalidReturnTypeException
      */
     public function deleteParcel(string $jobId, string $deliveryId, string $parcelId): DeleteParcelResponse
     {
-        $apiEndPoint = $this->request->getEndpoint() . "/jobs/{$jobId}/deliveries/{$deliveryId}/parcels/{$parcelId}" . $this->generateUrlParameters();
-        /** @var DeleteParcelResponse $response */
-        $response = $this->delete($apiEndPoint, DeleteParcelResponse::class);
-        return $response;
+        $apiEndPoint = $this->gophrRequest->getEndpoint() . sprintf('/jobs/%s/deliveries/%s/parcels/%s', $jobId, $deliveryId, $parcelId) . $this->generateUrlParameters();
+        /** @var DeleteParcelResponse $gophrResponse */
+        $gophrResponse = $this->delete($apiEndPoint, DeleteParcelResponse::class);
+        return $gophrResponse;
     }
 
     /**
      * Lists parcels
-     * @param string $jobId
-     * @param string $deliveryId
-     * @return ListParcelsResponse
      * @throws InvalidReturnTypeException
      */
     public function listParcels(string $jobId, string $deliveryId): ListParcelsResponse
     {
-        $apiEndPoint = $this->request->getEndpoint() . "/jobs/{$jobId}/deliveries/{$deliveryId}/parcels" . $this->generateUrlParameters();
+        $apiEndPoint = $this->gophrRequest->getEndpoint() . sprintf('/jobs/%s/deliveries/%s/parcels', $jobId, $deliveryId) . $this->generateUrlParameters();
         /** @var ListParcelsResponse $response */
         $response = $this->read($apiEndPoint, ListParcelsResponse::class);
         return $response;

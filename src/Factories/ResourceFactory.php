@@ -8,12 +8,10 @@ use Shimango\Gophr\Resources\Delivery;
 use Shimango\Gophr\Resources\Job;
 use Shimango\Gophr\Resources\Parcel;
 
-class ResourceFactory
+final class ResourceFactory
 {
     /**
      * Makes a Job resource
-     * @param Configuration $configuration
-     * @return Job
      * @throws GophrException
      */
     public function makeJobResource(Configuration $configuration): Job
@@ -24,8 +22,6 @@ class ResourceFactory
 
     /**
      *  Makes a Delivery resource
-     * @param Configuration $configuration
-     * @return Delivery
      * @throws GophrException
      */
     public function makeDeliveryResource(Configuration $configuration): Delivery
@@ -36,8 +32,6 @@ class ResourceFactory
 
     /**
      * Makes a parcel resource
-     * @param Configuration $configuration
-     * @return Parcel
      * @throws GophrException
      */
     public function makeParcelResource(Configuration $configuration): Parcel

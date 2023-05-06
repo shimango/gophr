@@ -15,17 +15,15 @@ use Shimango\Gophr\Http\Responses\Jobs\UpdateJobResponse;
  * A Job will have a pickup and many dropoffs.
  * @package Shimango\Gophr\Resources
  */
-class Job extends AbstractResource
+final class Job extends AbstractResource
 {
     /**
      * Creates a job
-     * @param array $jobData
-     * @return CreateJobResponse
      * @throws InvalidReturnTypeException
      */
     public function createJob(array $jobData): CreateJobResponse
     {
-        $apiEndPoint = $this->request->getEndpoint() . "/jobs" . $this->generateUrlParameters();
+        $apiEndPoint = $this->gophrRequest->getEndpoint() . "/jobs" . $this->generateUrlParameters();
         /** @var CreateJobResponse $response */
         $response = $this->create($apiEndPoint, $jobData, CreateJobResponse::class);
         return $response;
@@ -33,13 +31,11 @@ class Job extends AbstractResource
 
     /**
      * Gets a job
-     * @param string $jobId
-     * @return GetJobResponse
      * @throws InvalidReturnTypeException
      */
     public function getJob(string $jobId): GetJobResponse
     {
-        $apiEndPoint = $this->request->getEndpoint() . "/jobs/{$jobId}" . $this->generateUrlParameters();
+        $apiEndPoint = $this->gophrRequest->getEndpoint() . sprintf('/jobs/%s', $jobId) . $this->generateUrlParameters();
         /** @var GetJobResponse $response */
         $response = $this->read($apiEndPoint, GetJobResponse::class);
         return $response;
@@ -47,29 +43,23 @@ class Job extends AbstractResource
 
     /**
      * Updates a job
-     * @param string $jobId
-     * @param array $jobData
-     * @return UpdateJobResponse
      * @throws InvalidReturnTypeException
      */
     public function updateJob(string $jobId, array $jobData): UpdateJobResponse
     {
-        $apiEndPoint = $this->request->getEndpoint() . "/jobs/{$jobId}" . $this->generateUrlParameters();
-        /** @var UpdateJobResponse $response */
-        $response = $this->update($apiEndPoint, $jobData, UpdateJobResponse::class);
-        return $response;
+        $apiEndPoint = $this->gophrRequest->getEndpoint() . sprintf('/jobs/%s', $jobId) . $this->generateUrlParameters();
+        /** @var UpdateJobResponse $gophrResponse */
+        $gophrResponse = $this->update($apiEndPoint, $jobData, UpdateJobResponse::class);
+        return $gophrResponse;
     }
 
     /**
      * Cancels a job
-     * @param string $jobId
-     * @param array $jobData
-     * @return CancelJobResponse
      * @throws InvalidReturnTypeException
      */
     public function CancelJob(string $jobId, array $jobData): CancelJobResponse
     {
-        $apiEndPoint = $this->request->getEndpoint() . "/jobs/{$jobId}/cancel" . $this->generateUrlParameters();
+        $apiEndPoint = $this->gophrRequest->getEndpoint() . sprintf('/jobs/%s/cancel', $jobId) . $this->generateUrlParameters();
         /** @var CancelJobResponse $response */
         $response = $this->create($apiEndPoint, $jobData, CancelJobResponse::class);
         return $response;
@@ -77,16 +67,12 @@ class Job extends AbstractResource
 
     /**
      * Lists jobs
-     * @param int $page
-     * @param int $count
-     * @param bool $include_finished
-     * @return ListJobsResponse
      * @throws InvalidReturnTypeException
      */
     public function listJobs(int $page = 1 ,int $count = 15, bool $include_finished = false): ListJobsResponse
     {
         $include_finished = (int)$include_finished;
-        $apiEndPoint = $this->request->getEndpoint() . "/jobs" . $this->generateUrlParameters([
+        $apiEndPoint = $this->gophrRequest->getEndpoint() . "/jobs" . $this->generateUrlParameters([
                 'page'=> $page,
                 'count' => $count,
                 'include-finished' => $include_finished,
@@ -98,13 +84,11 @@ class Job extends AbstractResource
 
     /**
      * Gets a quote
-     * @param array $jobData
-     * @return GetQuoteResponse
      * @throws InvalidReturnTypeException
      */
     public function getQuote(array $jobData): GetQuoteResponse
     {
-        $apiEndPoint = $this->request->getEndpoint() . "/quotes" . $this->generateUrlParameters();
+        $apiEndPoint = $this->gophrRequest->getEndpoint() . "/quotes" . $this->generateUrlParameters();
         /** @var GetQuoteResponse $response */
         $response = $this->create($apiEndPoint, $jobData, GetQuoteResponse::class);
         return $response;

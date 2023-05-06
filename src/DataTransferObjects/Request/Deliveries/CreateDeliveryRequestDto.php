@@ -6,11 +6,12 @@ use Shimango\Gophr\DataTransferObjects\AbstractDataTransferObject;
 use Shimango\Gophr\DataTransferObjects\Dropoffs\DropoffDto;
 use Shimango\Gophr\DataTransferObjects\Pickups\PickupDto;
 
-class CreateDeliveryRequestDto extends AbstractDataTransferObject
+final class CreateDeliveryRequestDto extends AbstractDataTransferObject
 {
     public PickupDto $pickup;
+
     public DropoffDto $dropoff;
 
     /** @var \Shimango\Gophr\DataTransferObjects\Request\Parcels\CreateParcelRequestDto[] */
-    public $parcels;
+    public $parcels = [];
 }

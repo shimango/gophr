@@ -5,7 +5,7 @@ namespace Shimango\Gophr\Http\Responses\Deliveries;
 use Shimango\Gophr\DataTransferObjects\Response\Deliveries\ListDeliveriesResponseDto;
 use Shimango\Gophr\Http\AbstractGophrResponse;
 
-class ListDeliveriesResponse extends AbstractGophrResponse
+final class ListDeliveriesResponse extends AbstractGophrResponse
 {
     public function getContentsObject(): ?ListDeliveriesResponseDto
     {

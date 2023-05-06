@@ -6,36 +6,35 @@ namespace Shimango\Gophr\Common;
   * @category Class
  * @package  Shimango\Gophr
  */
-class Configuration
+final class Configuration
 {
-    private string $apiKey;
-    private string $apiVersion;
-    private bool $isSandbox;
-    private ?int $proxyPort;
-    private bool $proxyVerifySSL;
-
+    /**
+     * @var string
+     */
     private const API_VERSION = "v2";
+
+    /**
+     * @var string
+     */
     private const REST_BASE_URL = "https://api.gophr.com";
+
+    /**
+     * @var string
+     */
     private const REST_BASE_URL_SANDBOX = "https://api-sandbox.gophr.com";
+
+    /**
+     * @var array<string, string>
+     */
     private const ENDPOINTS = [
         'v2' => '/v2-commercial-api',
     ];
 
     /**
      * Creates a configuration object
-     * @param string $apiKey
-     * @param bool $isSandbox
-     * @param string $apiVersion
-     * @param int|null $proxyPort
-     * @param bool $proxyVerifySSL
      */
-    public function __construct(string $apiKey, bool $isSandbox = false, string $apiVersion = self::API_VERSION, ?int $proxyPort = null, bool $proxyVerifySSL = false)
+    public function __construct(private string $apiKey, private bool $isSandbox = false, private string $apiVersion = self::API_VERSION, private ?int $proxyPort = null, private bool $proxyVerifySSL = false)
     {
-        $this->apiKey = $apiKey;
-        $this->apiVersion = $apiVersion;
-        $this->isSandbox = $isSandbox;
-        $this->proxyPort = $proxyPort;
-        $this->proxyVerifySSL = $proxyVerifySSL;
     }
 
     /**
@@ -49,7 +48,6 @@ class Configuration
 
     /**
      * Sets the API Key
-     * @return $this
      */
     public function setApiKey(string $apiKey): Configuration
     {
@@ -59,7 +57,6 @@ class Configuration
 
     /**
      * Gets the API version
-     * @return string
      */
     public function getApiVersion(): string
     {
@@ -68,8 +65,6 @@ class Configuration
 
     /**
      * Sets the API version (v2)
-     * @param string $apiVersion
-     * @return Configuration
      */
     public function setApiVersion(string $apiVersion): Configuration
     {
@@ -79,7 +74,6 @@ class Configuration
 
     /**
      * Checks if sandbox mode is set
-     * @return bool
      */
     public function isSandbox(): bool
     {
@@ -88,8 +82,6 @@ class Configuration
 
     /**
      * Sets sandbox mode
-     * @param bool $isSandbox
-     * @return Configuration
      */
     public function setIsSandbox(bool $isSandbox): Configuration
     {
@@ -99,7 +91,6 @@ class Configuration
 
     /**
      * Gets the proxy port
-     * @return int|null
      */
     public function getProxyPort(): ?int
     {
@@ -108,8 +99,6 @@ class Configuration
 
     /**
      * Sets the proxy port
-     * @param int|null $proxyPort
-     * @return Configuration
      */
     public function setProxyPort(?int $proxyPort): Configuration
     {
@@ -119,7 +108,6 @@ class Configuration
 
     /**
      * Checks if proxy SSL verification is set
-     * @return bool
      */
     public function isProxyVerifySSL(): bool
     {
@@ -128,8 +116,6 @@ class Configuration
 
     /**
      * Sets proxy SSL verification
-     * @param bool $proxyVerifySSL
-     * @return Configuration
      */
     public function setProxyVerifySSL(bool $proxyVerifySSL): Configuration
     {
@@ -139,7 +125,6 @@ class Configuration
 
     /**
      * Gets the base url
-     * @return string
      */
     public function getBaseUrl(): string
     {
@@ -147,15 +132,14 @@ class Configuration
             return $restBaseUrlDevelopment;
         }
 
-        return $this->isSandbox() ? self::REST_BASE_URL_SANDBOX : self::REST_BASE_URL;
+        return $this->isSandbox ? self::REST_BASE_URL_SANDBOX : self::REST_BASE_URL;
     }
 
     /**
      * Gets the API endpoint based on the API version
-     * @return string|null
      */
     public function getApiEndPoint(): ?string
     {
-        return self::ENDPOINTS[$this->getApiVersion()] ?? null;
+        return self::ENDPOINTS[$this->apiVersion] ?? null;
     }
 }

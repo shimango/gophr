@@ -2,6 +2,6 @@
 
 namespace Shimango\Gophr\DataTransferObjects\Items\Response\Jobs;
 
-class GetJobDto extends CreateJobDto
+final class GetJobDto extends CreateJobDto
 {
 }

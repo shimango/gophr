@@ -21,7 +21,6 @@ interface GophrResponseInterface
      * This method MUST be implemented in such a way as to retain the immutability of the message, and MUST return an
      * instance that has the new protocol version.
      * @param string $version HTTP protocol version
-     * @return GophrResponseInterface
      */
     public function withProtocolVersion(string $version): GophrResponseInterface;
 
@@ -85,10 +84,9 @@ interface GophrResponseInterface
      * instance that has the new and/or updated header and value.
      * @param string $name Case-insensitive header field name.
      * @param string|string[] $value Header value(s).
-     * @return GophrResponseInterface
      * @throws InvalidArgumentException for invalid header names or values.
      */
-    public function withHeader(string $name, array $value): GophrResponseInterface;
+    public function withHeader(string $name, string|array $value): GophrResponseInterface;
 
     /**
      * Return an instance with the specified header appended with the given value. Existing values for the specified
@@ -97,17 +95,15 @@ interface GophrResponseInterface
      * message, and MUST return an instance that has the new header and/or value.
      * @param string $name Case-insensitive header field name to add.
      * @param string|string[] $value Header value(s).
-     * @return GophrResponseInterface
      * @throws InvalidArgumentException for invalid header names or values.
      */
-    public function withAddedHeader(string $name, array $value): GophrResponseInterface;
+    public function withAddedHeader(string $name, string|array $value): GophrResponseInterface;
 
     /**
      * Return an instance without the specified header. Header resolution MUST be done without case-sensitivity. This
      * method MUST be implemented in such a way as to retain the immutability of the message, and MUST return an
      * instance that removes the named header.
      * @param string $name Case-insensitive header field name to remove.
-     * @return GophrResponseInterface
      */
     public function withoutHeader(string $name): GophrResponseInterface;
 
@@ -121,11 +117,10 @@ interface GophrResponseInterface
      * Return an instance with the specified message body. The body MUST be a StreamInterface object. This method MUST
      * be implemented in such a way as to retain the immutability of the message, and MUST return a new instance that
      * has the new body stream.
-     * @param StreamInterface $body Body.
-     * @return GophrResponseInterface
+     * @param StreamInterface $stream Body.
      * @throws InvalidArgumentException When the body is not valid.
      */
-    public function withBody(StreamInterface $body): GophrResponseInterface;
+    public function withBody(StreamInterface $stream): GophrResponseInterface;
 
     /**
      * Gets the response status code. The status code is a 3-digit integer result code of the server's attempt to
@@ -145,7 +140,6 @@ interface GophrResponseInterface
      * @param int $code The 3-digit integer result code to set.
      * @param string $reasonPhrase The reason phrase to use with the provided status code; if none is provided,
      * implementations MAY use the defaults as suggested in the HTTP specification.
-     * @return GophrResponseInterface
      * @throws InvalidArgumentException For invalid status code arguments.
      */
     public function withStatus(int $code, string $reasonPhrase = ''): GophrResponseInterface;
@@ -163,13 +157,11 @@ interface GophrResponseInterface
 
     /**
      * Gets the response content as a DTO
-     * @return AbstractDataTransferObject|null
      */
     public function getContentsObject(): ?AbstractDataTransferObject;
 
     /**
      * Gets the response content as an array
-     * @return array
      */
     public function getContentsArray(): array;
 }

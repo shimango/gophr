@@ -2,13 +2,14 @@
 
 namespace Shimango\Gophr\Exceptions;
 
+use Stringable;
 use Exception;
 
 /**
  * Class GophrException
  * @package Shimango\Gophr\Exceptions
  */
-abstract class GophrException extends Exception
+abstract class GophrException extends Exception implements Stringable
 {
     /**
      * Construct a new Gophr Exception handler
@@ -25,8 +26,8 @@ abstract class GophrException extends Exception
      * Stringify the returned error and message
      * @return string The returned string message
      */
-    public function __toString()
+    public function __toString(): string
     {
-        return __CLASS__ . ": [{$this->code}]: {$this->message}\n";
+        return self::class . sprintf(': [%s]: %s%s', $this->code, $this->message, PHP_EOL);
     }
 }

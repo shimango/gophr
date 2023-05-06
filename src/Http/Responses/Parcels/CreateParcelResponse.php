@@ -5,7 +5,7 @@ namespace Shimango\Gophr\Http\Responses\Parcels;
 use Shimango\Gophr\DataTransferObjects\Response\Parcels\CreateParcelResponseDto;
 use Shimango\Gophr\Http\AbstractGophrResponse;
 
-class CreateParcelResponse extends AbstractGophrResponse
+final class CreateParcelResponse extends AbstractGophrResponse
 {
     public function getContentsObject(): ?CreateParcelResponseDto
     {

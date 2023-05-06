@@ -5,7 +5,7 @@ namespace Shimango\Gophr\DataTransferObjects\Response\Parcels;
 use Shimango\Gophr\DataTransferObjects\AbstractDataTransferObject;
 use Shimango\Gophr\DataTransferObjects\Items\Response\Parcels\UpdateParcelDto;
 
-class UpdateParcelResponseDto extends AbstractDataTransferObject
+final class UpdateParcelResponseDto extends AbstractDataTransferObject
 {
-    public ?UpdateParcelDto $data;
+    public ?UpdateParcelDto $data = null;
 }
