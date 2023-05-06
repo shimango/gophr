@@ -143,6 +143,10 @@ class Configuration
      */
     public function getBaseUrl(): string
     {
+        if ($restBaseUrlDevelopment = getenv('REST_BASE_URL_DEVELOPMENT')) {
+            return $restBaseUrlDevelopment;
+        }
+
         return $this->isSandbox() ? self::REST_BASE_URL_SANDBOX : self::REST_BASE_URL;
     }
 
