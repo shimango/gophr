@@ -81,6 +81,6 @@ abstract class AbstractResource
             $parameters['XDEBUG_SESSION'] = $xdebugSession;
         }
 
-        return !empty($parameters) ? sprintf('?%s', http_build_query($parameters)) : '';
+        return $parameters === [] ? '' : sprintf('?%s', http_build_query($parameters));
     }
 }

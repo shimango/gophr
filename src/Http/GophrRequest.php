@@ -47,7 +47,7 @@ class GophrRequest implements GophrRequestInterface
     /**
      * Request options to decide if Guzzle Client should throw exceptions when http code is 4xx or 5xx
      */
-    protected bool $http_errors;
+    protected bool $http_errors = true;
 
     /**
      * Constructs a new Gophr Request object
@@ -80,9 +80,7 @@ class GophrRequest implements GophrRequestInterface
      */
     protected bool $proxyVerifySSL = false)
     {
-        $this->http_errors = true;
-
-        if (!$this->apiKey) {
+        if ($this->apiKey === '') {
             throw new RequestException("No API Key has been provided");
         }
 
