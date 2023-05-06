@@ -12,27 +12,17 @@ use Shimango\Gophr\Http\GophrRequest;
  */
 abstract class AbstractResource
 {
-    protected GophrRequest $request;
+    public const REQUEST_GET = "GET";
+    public const REQUEST_POST = "POST";
+    public const REQUEST_PATCH = "PATCH";
+    public const REQUEST_DELETE = "DELETE";
 
-    const REQUEST_GET = "GET";
-    const REQUEST_POST = "POST";
-    const REQUEST_PATCH = "PATCH";
-    const REQUEST_DELETE = "DELETE";
-
-    /**
-     * @param GophrRequest $request
-     */
-    public function __construct(GophrRequest $request)
+    public function __construct(protected GophrRequest $request)
     {
-        $this->request = $request;
     }
 
     /**
      * Posts
-     * @param string $endPoint
-     * @param array $body
-     * @param string|null $dtoResponseClass
-     * @return AbstractGophrResponse
      * @throws InvalidReturnTypeException
      */
     public function create(string $endPoint, array $body, ?string $dtoResponseClass = null): AbstractGophrResponse
@@ -42,9 +32,6 @@ abstract class AbstractResource
 
     /**
      * Gets
-     * @param string $endPoint
-     * @param string|null $dtoResponseClass
-     * @return AbstractGophrResponse
      * @throws InvalidReturnTypeException
      */
     public function read(string $endPoint, ?string $dtoResponseClass = null): AbstractGophrResponse
@@ -54,10 +41,6 @@ abstract class AbstractResource
 
     /**
      * Updates
-     * @param string $endPoint
-     * @param array $body
-     * @param string|null $dtoResponseClass
-     * @return AbstractGophrResponse
      * @throws InvalidReturnTypeException
      */
     public function update(string $endPoint, array $body, ?string $dtoResponseClass = null): AbstractGophrResponse
@@ -67,9 +50,6 @@ abstract class AbstractResource
 
     /**
      * Deletes
-     * @param string $endPoint
-     * @param string|null $dtoResponseClass
-     * @return AbstractGophrResponse
      * @throws InvalidReturnTypeException
      */
     public function delete(string $endPoint, ?string $dtoResponseClass = null): AbstractGophrResponse
@@ -79,8 +59,6 @@ abstract class AbstractResource
 
     /**
      * Given a key value array, this function generates a URL-encoded query string from its contents.
-     * @param array $parameters
-     * @return string
      */
     protected function generateUrlParameters(array $parameters = []): string
     {

@@ -18,10 +18,6 @@ class Parcel extends AbstractResource
 {
     /**
      * Creates a parcel
-     * @param string $jobId
-     * @param string $deliveryId
-     * @param array $parcelData
-     * @return CreateParcelResponse
      * @throws InvalidReturnTypeException
      */
     public function createParcel(string $jobId, string $deliveryId, array $parcelData): CreateParcelResponse
@@ -34,10 +30,6 @@ class Parcel extends AbstractResource
 
     /**
      * Gets a parcel
-     * @param string $jobId
-     * @param string $deliveryId
-     * @param string $parcelId
-     * @return GetParcelResponse
      * @throws InvalidReturnTypeException
      */
     public function getParcel(string $jobId, string $deliveryId, string $parcelId): GetParcelResponse
@@ -50,11 +42,6 @@ class Parcel extends AbstractResource
 
     /**
      * Updates a parcel
-     * @param string $jobId
-     * @param string $deliveryId
-     * @param string $parcelId
-     * @param array $deliveryData
-     * @return UpdateParcelResponse
      * @throws InvalidReturnTypeException
      */
     public function updateParcel(string $jobId, string $deliveryId, string $parcelId, array $deliveryData): UpdateParcelResponse
@@ -67,10 +54,6 @@ class Parcel extends AbstractResource
 
     /**
      * deletes a parcel
-     * @param string $jobId
-     * @param string $deliveryId
-     * @param string $parcelId
-     * @return DeleteParcelResponse
      * @throws InvalidReturnTypeException
      */
     public function deleteParcel(string $jobId, string $deliveryId, string $parcelId): DeleteParcelResponse
@@ -83,9 +66,6 @@ class Parcel extends AbstractResource
 
     /**
      * Lists parcels
-     * @param string $jobId
-     * @param string $deliveryId
-     * @return ListParcelsResponse
      * @throws InvalidReturnTypeException
      */
     public function listParcels(string $jobId, string $deliveryId): ListParcelsResponse

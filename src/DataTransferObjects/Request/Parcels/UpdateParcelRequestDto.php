@@ -6,23 +6,23 @@ use Shimango\Gophr\DataTransferObjects\AbstractDataTransferObject;
 
 class UpdateParcelRequestDto extends AbstractDataTransferObject
 {
-    public ?string $parcel_external_id;
-    public ?string $parcel_reference_number;
-    public ?string $parcel_description;
-    public ?float $parcel_insurance_value;
-    public ?float $width;
-    public ?float $length;
-    public ?float $height;
-    public ?float $weight;
-    public ?int $id_check;
-    public ?int $is_food;
-    public ?int $is_fragile;
-    public ?int $is_liquid;
-    public ?int $is_not_rotatable;
-    public ?int $is_glass;
-    public ?int $is_baked;
-    public ?int $is_flower;
-    public ?int $is_alcohol;
-    public ?int $is_beef;
-    public ?int $is_pork;
+    public ?string $parcel_external_id = null;
+    public ?string $parcel_reference_number = null;
+    public ?string $parcel_description = null;
+    public ?float $parcel_insurance_value = null;
+    public ?float $width = null;
+    public ?float $length = null;
+    public ?float $height = null;
+    public ?float $weight = null;
+    public ?int $id_check = null;
+    public ?int $is_food = null;
+    public ?int $is_fragile = null;
+    public ?int $is_liquid = null;
+    public ?int $is_not_rotatable = null;
+    public ?int $is_glass = null;
+    public ?int $is_baked = null;
+    public ?int $is_flower = null;
+    public ?int $is_alcohol = null;
+    public ?int $is_beef = null;
+    public ?int $is_pork = null;
 }

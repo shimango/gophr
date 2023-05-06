@@ -26,23 +26,19 @@ use Shimango\Gophr\Http\Responses\Parcels\UpdateParcelResponse;
 
 class Client
 {
-    private Configuration $configuration;
     private ResourceFactory $resourceFactory;
 
     /**
      * Creates a Gophr client object with the given configuration settings.
-     * @param Configuration $configuration
      */
-    public function __construct(Configuration $configuration)
+    public function __construct(private Configuration $configuration)
     {
-        $this->configuration = $configuration;
         $this->resourceFactory = new ResourceFactory();
     }
 
     /**
      * Gets a quote
      * @param array $jobData The job data
-     * @return GetQuoteResponse
      * @throws GophrException
      */
     public function getQuote(array $jobData): GetQuoteResponse
@@ -53,7 +49,6 @@ class Client
     /**
      * Gets a job.
      * @param string $jobId The job id
-     * @return GetJobResponse
      * @throws GophrException
      */
     public function getJob(string $jobId): GetJobResponse
@@ -64,7 +59,6 @@ class Client
     /**
      * Creates a job
      * @param array $jobData The job data
-     * @return CreateJobResponse
      * @throws GophrException
      */
     public function createJob(array $jobData): CreateJobResponse
@@ -76,7 +70,6 @@ class Client
      * Updates a job
      * @param string $jobId The id of the job
      * @param array $jobData The job data
-     * @return UpdateJobResponse
      * @throws GophrException
      */
     public function updateJob(string $jobId, array $jobData): UpdateJobResponse
@@ -88,7 +81,6 @@ class Client
      * Cancel a job
      * @param string $jobId The id of the job
      * @param array $jobData The job data
-     * @return CancelJobResponse
      * @throws GophrException
      */
     public function cancelJob(string $jobId, array $jobData): CancelJobResponse
@@ -98,10 +90,6 @@ class Client
 
     /**
      * Lists jobs
-     * @param int $page
-     * @param int $count
-     * @param bool $include_finished
-     * @return ListJobsResponse
      * @throws GophrException
      */
     public function listJobs(int $page = 1 ,int $count = 15, bool $include_finished = false): ListJobsResponse
@@ -113,7 +101,6 @@ class Client
      * Gets a delivery
      * @param string $jobId The id of the parent job
      * @param string $deliveryId The id of the delivery
-     * @return GetDeliveryResponse
      * @throws GophrException
      */
     public function getDelivery(string $jobId, string $deliveryId): GetDeliveryResponse
@@ -125,7 +112,6 @@ class Client
      * Creates a delivery
      * @param string $jobId The id of the parent job
      * @param array $deliveryData The delivery data
-     * @return CreateDeliveryResponse
      * @throws GophrException
      */
     public function createDelivery(string $jobId, array $deliveryData): CreateDeliveryResponse
@@ -138,7 +124,6 @@ class Client
      * @param string $jobId The id of the parent job
      * @param string $deliveryId The id of the delivery
      * @param array $deliveryData The delivery data
-     * @return UpdateDeliveryResponse
      * @throws GophrException
      */
     public function updateDelivery(string $jobId, string $deliveryId, array $deliveryData): UpdateDeliveryResponse
@@ -148,8 +133,6 @@ class Client
 
     /**
      * Lists deliveries
-     * @param string $jobId
-     * @return ListDeliveriesResponse
      * @throws GophrException
      */
     public function listDeliveries(string $jobId): ListDeliveriesResponse
@@ -162,7 +145,6 @@ class Client
      * @param string $jobId The id of the parent job
      * @param string $deliveryId The id of the delivery
      * @param array $deliveryData The delivery data
-     * @return CancelDeliveryResponse
      * @throws GophrException
      */
     public function cancelDelivery(string $jobId, string $deliveryId, array $deliveryData): CancelDeliveryResponse
@@ -175,7 +157,6 @@ class Client
      * @param string $jobId The id of the parent job
      * @param string $deliveryId The id of the delivery
      * @param string $parcelId The parcel id
-     * @return GetParcelResponse
      * @throws GophrException
      * @throws InvalidReturnTypeException
      */
@@ -189,7 +170,6 @@ class Client
      * @param string $jobId The id of the parent job
      * @param string $deliveryId The id of the delivery
      * @param array $parcelData The parcel data
-     * @return CreateParcelResponse
      * @throws GophrException
      * @throws InvalidReturnTypeException
      */
@@ -204,7 +184,6 @@ class Client
      * @param string $deliveryId The id of the delivery
      * @param string $parcelId The parcel id
      * @param array $parcelData The parcel data
-     * @return UpdateParcelResponse
      * @throws GophrException
      * @throws InvalidReturnTypeException
      */
@@ -217,7 +196,6 @@ class Client
      * Lists parcels
      * @param string $jobId The id of the parent job
      * @param string $deliveryId The id of the delivery
-     * @return ListParcelsResponse
      * @throws GophrException
      * @throws InvalidReturnTypeException
      */
@@ -231,7 +209,6 @@ class Client
      * @param string $jobId The id of the parent job
      * @param string $deliveryId The id of the delivery
      * @param string $parcelId The parcel id
-     * @return DeleteParcelResponse
      * @throws GophrException
      * @throws InvalidReturnTypeException
      */

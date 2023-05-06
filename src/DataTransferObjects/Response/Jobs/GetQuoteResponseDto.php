@@ -7,5 +7,5 @@ use Shimango\Gophr\DataTransferObjects\Items\Response\Jobs\GetQuoteDto;
 
 class GetQuoteResponseDto extends AbstractDataTransferObject
 {
-    public ?GetQuoteDto $data;
+    public ?GetQuoteDto $data = null;
 }

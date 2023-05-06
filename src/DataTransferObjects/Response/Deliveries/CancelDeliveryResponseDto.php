@@ -7,5 +7,5 @@ use Shimango\Gophr\DataTransferObjects\Items\Response\Deliveries\CancelDeliveryD
 
 class CancelDeliveryResponseDto extends AbstractDataTransferObject
 {
-    public ?CancelDeliveryDto $data;
+    public ?CancelDeliveryDto $data = null;
 }

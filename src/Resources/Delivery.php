@@ -18,9 +18,6 @@ class Delivery extends AbstractResource
 {
     /**
      * Creates delivery
-     * @param string $jobId
-     * @param array $deliveryData
-     * @return CreateDeliveryResponse
      * @throws InvalidReturnTypeException
      */
     public function createDelivery(string $jobId, array $deliveryData): CreateDeliveryResponse
@@ -33,9 +30,6 @@ class Delivery extends AbstractResource
 
     /**
      * Gets a delivery
-     * @param string $jobId
-     * @param string $deliveryId
-     * @return GetDeliveryResponse
      * @throws InvalidReturnTypeException
      */
     public function getDelivery(string $jobId, string $deliveryId): GetDeliveryResponse
@@ -48,10 +42,6 @@ class Delivery extends AbstractResource
 
     /**
      * Updates a delivery
-     * @param string $jobId
-     * @param string $deliveryId
-     * @param array $deliveryData
-     * @return UpdateDeliveryResponse
      * @throws InvalidReturnTypeException
      */
     public function updateDelivery(string $jobId, string $deliveryId, array $deliveryData): UpdateDeliveryResponse
@@ -64,8 +54,6 @@ class Delivery extends AbstractResource
 
     /**
      * Lists deliveries
-     * @param string $jobId
-     * @return ListDeliveriesResponse
      * @throws InvalidReturnTypeException
      */
     public function listDeliveries(string $jobId): ListDeliveriesResponse
@@ -78,10 +66,6 @@ class Delivery extends AbstractResource
 
     /**
      * Cancels a delivery
-     * @param string $jobId
-     * @param string $deliveryId
-     * @param array $deliveryData
-     * @return CancelDeliveryResponse
      * @throws InvalidReturnTypeException
      */
     public function cancelDelivery(string $jobId, string $deliveryId, array $deliveryData): CancelDeliveryResponse
@@ -94,8 +78,6 @@ class Delivery extends AbstractResource
 
     /**
      * Progresses a delivery status. This functionality is only available on the sandbox server.
-     * @param string $jobId
-     * @param string $deliveryId
      * @return progressDeliveryStatusResponse
      * @throws InvalidReturnTypeException
      */

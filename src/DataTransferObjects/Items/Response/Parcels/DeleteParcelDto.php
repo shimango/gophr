@@ -6,5 +6,5 @@ use Shimango\Gophr\DataTransferObjects\AbstractDataTransferObject;
 
 class DeleteParcelDto extends AbstractDataTransferObject
 {
-    public ?string $message;
+    public ?string $message = null;
 }

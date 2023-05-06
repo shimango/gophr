@@ -7,5 +7,5 @@ use Shimango\Gophr\DataTransferObjects\Items\Response\Parcels\GetParcelDto;
 
 class GetParcelResponseDto extends AbstractDataTransferObject
 {
-    public ?GetParcelDto $data;
+    public ?GetParcelDto $data = null;
 }

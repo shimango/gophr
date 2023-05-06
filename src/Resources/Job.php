@@ -19,8 +19,6 @@ class Job extends AbstractResource
 {
     /**
      * Creates a job
-     * @param array $jobData
-     * @return CreateJobResponse
      * @throws InvalidReturnTypeException
      */
     public function createJob(array $jobData): CreateJobResponse
@@ -33,8 +31,6 @@ class Job extends AbstractResource
 
     /**
      * Gets a job
-     * @param string $jobId
-     * @return GetJobResponse
      * @throws InvalidReturnTypeException
      */
     public function getJob(string $jobId): GetJobResponse
@@ -47,9 +43,6 @@ class Job extends AbstractResource
 
     /**
      * Updates a job
-     * @param string $jobId
-     * @param array $jobData
-     * @return UpdateJobResponse
      * @throws InvalidReturnTypeException
      */
     public function updateJob(string $jobId, array $jobData): UpdateJobResponse
@@ -62,9 +55,6 @@ class Job extends AbstractResource
 
     /**
      * Cancels a job
-     * @param string $jobId
-     * @param array $jobData
-     * @return CancelJobResponse
      * @throws InvalidReturnTypeException
      */
     public function CancelJob(string $jobId, array $jobData): CancelJobResponse
@@ -77,10 +67,6 @@ class Job extends AbstractResource
 
     /**
      * Lists jobs
-     * @param int $page
-     * @param int $count
-     * @param bool $include_finished
-     * @return ListJobsResponse
      * @throws InvalidReturnTypeException
      */
     public function listJobs(int $page = 1 ,int $count = 15, bool $include_finished = false): ListJobsResponse
@@ -98,8 +84,6 @@ class Job extends AbstractResource
 
     /**
      * Gets a quote
-     * @param array $jobData
-     * @return GetQuoteResponse
      * @throws InvalidReturnTypeException
      */
     public function getQuote(array $jobData): GetQuoteResponse

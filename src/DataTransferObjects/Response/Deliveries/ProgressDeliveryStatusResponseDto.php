@@ -7,5 +7,5 @@ use Shimango\Gophr\DataTransferObjects\Items\Response\Deliveries\CreateDeliveryD
 
 class ProgressDeliveryStatusResponseDto extends AbstractDataTransferObject
 {
-    public ?CreateDeliveryDto $data;
+    public ?CreateDeliveryDto $data = null;
 }

@@ -7,5 +7,5 @@ use Shimango\Gophr\DataTransferObjects\Items\Response\Parcels\DeleteParcelDto;
 
 class DeleteParcelResponseDto extends AbstractDataTransferObject
 {
-    public ?DeleteParcelDto $data;
+    public ?DeleteParcelDto $data = null;
 }

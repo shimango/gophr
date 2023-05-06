@@ -7,5 +7,5 @@ use Shimango\Gophr\DataTransferObjects\Items\Response\Deliveries\UpdateDeliveryD
 
 class UpdateDeliveryResponseDto extends AbstractDataTransferObject
 {
-    public ?UpdateDeliveryDto $data;
+    public ?UpdateDeliveryDto $data = null;
 }

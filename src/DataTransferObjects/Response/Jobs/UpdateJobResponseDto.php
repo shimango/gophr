@@ -7,5 +7,5 @@ use Shimango\Gophr\DataTransferObjects\Items\Response\Jobs\UpdateJobDto;
 
 class UpdateJobResponseDto extends AbstractDataTransferObject
 {
-    public ?UpdateJobDto $data;
+    public ?UpdateJobDto $data = null;
 }
