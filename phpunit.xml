@@ -20,7 +20,7 @@
         </testsuite>
     </testsuites>
 
-    <coverage>
+    <coverage cacheDirectory="./tests/data/coverage">
         <include>
             <directory suffix=".php">./src</directory>
         </include>
