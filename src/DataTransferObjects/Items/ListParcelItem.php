@@ -9,5 +9,6 @@ class ListParcelItem extends AbstractDataTransferObject
     public string $parcel_id;
 
     public ?string $parcel_external_id = null;
+
     public ?string $barcode_reference = null;
 }

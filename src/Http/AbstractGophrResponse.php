@@ -14,6 +14,7 @@ abstract class AbstractGophrResponse implements GophrResponseInterface
     private string $protocolVersion = '1.1';
 
     protected ?AbstractDataTransferObject $object = null;
+
     protected array $contentsArray;
 
     /**
@@ -141,9 +142,7 @@ abstract class AbstractGophrResponse implements GophrResponseInterface
     {
         if (!isset($this->object)) {
             try {
-                /** @var AbstractDataTransferObject object */
-                $object = new $className($this->getContentsArray());
-                $this->object = $object;
+                $this->object = new $className($this->getContentsArray());
             } catch (DataTransferObjectError) {
                 $this->object = null;
             }

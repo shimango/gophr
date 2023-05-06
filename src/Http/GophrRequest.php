@@ -85,6 +85,7 @@ class GophrRequest implements GophrRequestInterface
         if (!$this->apiKey) {
             throw new RequestException("No API Key has been provided");
         }
+
         $this->timeout = 100;
         $this->headers = $this->getDefaultHeaders();
     }

@@ -9,5 +9,6 @@ class Links extends AbstractDataTransferObject
     public string $first;
 
     public ?string $previous = null;
+
     public ?string $next = null;
 }
