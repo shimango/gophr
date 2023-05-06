@@ -236,7 +236,7 @@ final class GophrRequest implements GophrRequestInterface
     {
         try {
         $client = HttpClientFactory::makeGuzzleClient($this->baseUrl, $this->headers, $this->http_errors, $this->proxyVerifySSL, $this->proxyPort);
-            $result = $client->request(
+            $response = $client->request(
                 $requestType,
                 $this->endpoint,
                 [
@@ -262,9 +262,9 @@ final class GophrRequest implements GophrRequestInterface
 
         // Wrap response in CreateJobResponse layer
         return ResponseFactory::makeGophrResponse(
-            $result->getBody(),
-            $result->getStatusCode(),
-            $result->getHeaders(),
+            $response->getBody(),
+            $response->getStatusCode(),
+            $response->getHeaders(),
             $this->returnType
         );
     }

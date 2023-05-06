@@ -19,11 +19,11 @@ abstract class AbstractGophrResponse implements GophrResponseInterface
 
     /**
      * Creates a new Gophr HTTP response entity
-     * @param StreamInterface $body The body of the response
+     * @param StreamInterface $stream The body of the response
      * @param int $httpStatusCode The returned status code
      * @param array $headers The returned headers
      */
-    public function __construct(private StreamInterface $body, private int $httpStatusCode, private array $headers)
+    public function __construct(private StreamInterface $stream, private int $httpStatusCode, private array $headers)
     {
     }
 
@@ -33,7 +33,7 @@ abstract class AbstractGophrResponse implements GophrResponseInterface
      */
     public function getBody(): StreamInterface
     {
-        return $this->body;
+        return $this->stream;
     }
 
     /**
@@ -109,10 +109,10 @@ abstract class AbstractGophrResponse implements GophrResponseInterface
         return $new;
     }
 
-    public function withBody(StreamInterface $body): GophrResponseInterface
+    public function withBody(StreamInterface $stream): GophrResponseInterface
     {
         $new = clone $this;
-        $new->body = $body;
+        $new->stream = $stream;
         return $new;
     }
 
@@ -132,7 +132,7 @@ abstract class AbstractGophrResponse implements GophrResponseInterface
     public function getContentsArray(): array
     {
         if (!isset($this->contentsArray)) {
-            $this->contentsArray = json_decode($this->body->getContents(), true, 512, JSON_THROW_ON_ERROR) ?: [];
+            $this->contentsArray = json_decode($this->stream->getContents(), true, 512, JSON_THROW_ON_ERROR) ?: [];
         }
 
         return $this->contentsArray;

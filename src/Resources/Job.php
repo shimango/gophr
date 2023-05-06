@@ -23,7 +23,7 @@ final class Job extends AbstractResource
      */
     public function createJob(array $jobData): CreateJobResponse
     {
-        $apiEndPoint = $this->request->getEndpoint() . "/jobs" . $this->generateUrlParameters();
+        $apiEndPoint = $this->gophrRequest->getEndpoint() . "/jobs" . $this->generateUrlParameters();
         /** @var CreateJobResponse $response */
         $response = $this->create($apiEndPoint, $jobData, CreateJobResponse::class);
         return $response;
@@ -35,7 +35,7 @@ final class Job extends AbstractResource
      */
     public function getJob(string $jobId): GetJobResponse
     {
-        $apiEndPoint = $this->request->getEndpoint() . sprintf('/jobs/%s', $jobId) . $this->generateUrlParameters();
+        $apiEndPoint = $this->gophrRequest->getEndpoint() . sprintf('/jobs/%s', $jobId) . $this->generateUrlParameters();
         /** @var GetJobResponse $response */
         $response = $this->read($apiEndPoint, GetJobResponse::class);
         return $response;
@@ -47,10 +47,10 @@ final class Job extends AbstractResource
      */
     public function updateJob(string $jobId, array $jobData): UpdateJobResponse
     {
-        $apiEndPoint = $this->request->getEndpoint() . sprintf('/jobs/%s', $jobId) . $this->generateUrlParameters();
-        /** @var UpdateJobResponse $response */
-        $response = $this->update($apiEndPoint, $jobData, UpdateJobResponse::class);
-        return $response;
+        $apiEndPoint = $this->gophrRequest->getEndpoint() . sprintf('/jobs/%s', $jobId) . $this->generateUrlParameters();
+        /** @var UpdateJobResponse $gophrResponse */
+        $gophrResponse = $this->update($apiEndPoint, $jobData, UpdateJobResponse::class);
+        return $gophrResponse;
     }
 
     /**
@@ -59,7 +59,7 @@ final class Job extends AbstractResource
      */
     public function CancelJob(string $jobId, array $jobData): CancelJobResponse
     {
-        $apiEndPoint = $this->request->getEndpoint() . sprintf('/jobs/%s/cancel', $jobId) . $this->generateUrlParameters();
+        $apiEndPoint = $this->gophrRequest->getEndpoint() . sprintf('/jobs/%s/cancel', $jobId) . $this->generateUrlParameters();
         /** @var CancelJobResponse $response */
         $response = $this->create($apiEndPoint, $jobData, CancelJobResponse::class);
         return $response;
@@ -72,7 +72,7 @@ final class Job extends AbstractResource
     public function listJobs(int $page = 1 ,int $count = 15, bool $include_finished = false): ListJobsResponse
     {
         $include_finished = (int)$include_finished;
-        $apiEndPoint = $this->request->getEndpoint() . "/jobs" . $this->generateUrlParameters([
+        $apiEndPoint = $this->gophrRequest->getEndpoint() . "/jobs" . $this->generateUrlParameters([
                 'page'=> $page,
                 'count' => $count,
                 'include-finished' => $include_finished,
@@ -88,7 +88,7 @@ final class Job extends AbstractResource
      */
     public function getQuote(array $jobData): GetQuoteResponse
     {
-        $apiEndPoint = $this->request->getEndpoint() . "/quotes" . $this->generateUrlParameters();
+        $apiEndPoint = $this->gophrRequest->getEndpoint() . "/quotes" . $this->generateUrlParameters();
         /** @var GetQuoteResponse $response */
         $response = $this->create($apiEndPoint, $jobData, GetQuoteResponse::class);
         return $response;

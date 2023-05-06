@@ -32,7 +32,7 @@ abstract class AbstractResource
      */
     public const REQUEST_DELETE = "DELETE";
 
-    public function __construct(protected GophrRequest $request)
+    public function __construct(protected GophrRequest $gophrRequest)
     {
     }
 
@@ -42,7 +42,7 @@ abstract class AbstractResource
      */
     public function create(string $endPoint, array $body, ?string $dtoResponseClass = null): AbstractGophrResponse
     {
-        return $this->request->setEndpoint($endPoint)->attachBody($body)->setReturnType($dtoResponseClass)->execute(self::REQUEST_POST);
+        return $this->gophrRequest->setEndpoint($endPoint)->attachBody($body)->setReturnType($dtoResponseClass)->execute(self::REQUEST_POST);
     }
 
     /**
@@ -51,7 +51,7 @@ abstract class AbstractResource
      */
     public function read(string $endPoint, ?string $dtoResponseClass = null): AbstractGophrResponse
     {
-        return $this->request->setEndpoint($endPoint)->setReturnType($dtoResponseClass)->execute(self::REQUEST_GET);
+        return $this->gophrRequest->setEndpoint($endPoint)->setReturnType($dtoResponseClass)->execute(self::REQUEST_GET);
     }
 
     /**
@@ -60,7 +60,7 @@ abstract class AbstractResource
      */
     public function update(string $endPoint, array $body, ?string $dtoResponseClass = null): AbstractGophrResponse
     {
-        return $this->request->setEndpoint($endPoint)->attachBody($body)->setReturnType($dtoResponseClass)->execute(self::REQUEST_PATCH);
+        return $this->gophrRequest->setEndpoint($endPoint)->attachBody($body)->setReturnType($dtoResponseClass)->execute(self::REQUEST_PATCH);
     }
 
     /**
@@ -69,7 +69,7 @@ abstract class AbstractResource
      */
     public function delete(string $endPoint, ?string $dtoResponseClass = null): AbstractGophrResponse
     {
-        return $this->request->setEndpoint($endPoint)->setReturnType($dtoResponseClass)->execute(self::REQUEST_DELETE);
+        return $this->gophrRequest->setEndpoint($endPoint)->setReturnType($dtoResponseClass)->execute(self::REQUEST_DELETE);
     }
 
     /**

@@ -10,8 +10,8 @@ final class ResponseFactory
     /**
      * Makes a Gophr request
      */
-    public static function makeGophrResponse(StreamInterface $body, int $httpStatusCode, array $headers, string $dtoReturnType): AbstractGophrResponse
+    public static function makeGophrResponse(StreamInterface $stream, int $httpStatusCode, array $headers, string $dtoReturnType): AbstractGophrResponse
     {
-            return new $dtoReturnType($body, $httpStatusCode, $headers);
+            return new $dtoReturnType($stream, $httpStatusCode, $headers);
     }
 }

@@ -117,10 +117,10 @@ interface GophrResponseInterface
      * Return an instance with the specified message body. The body MUST be a StreamInterface object. This method MUST
      * be implemented in such a way as to retain the immutability of the message, and MUST return a new instance that
      * has the new body stream.
-     * @param StreamInterface $body Body.
+     * @param StreamInterface $stream Body.
      * @throws InvalidArgumentException When the body is not valid.
      */
-    public function withBody(StreamInterface $body): GophrResponseInterface;
+    public function withBody(StreamInterface $stream): GophrResponseInterface;
 
     /**
      * Gets the response status code. The status code is a 3-digit integer result code of the server's attempt to
