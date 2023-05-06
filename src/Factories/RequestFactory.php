@@ -10,8 +10,6 @@ class RequestFactory
 {
     /**
      * Makes a Gophr request
-     * @param Configuration $configuration
-     * @return GophrRequest
      * @throws GophrException
      */
     public static function makeGophrRequest(Configuration $configuration): GophrRequest

@@ -12,9 +12,24 @@ use Shimango\Gophr\Http\GophrRequest;
  */
 abstract class AbstractResource
 {
+    /**
+     * @var string
+     */
     public const REQUEST_GET = "GET";
+
+    /**
+     * @var string
+     */
     public const REQUEST_POST = "POST";
+
+    /**
+     * @var string
+     */
     public const REQUEST_PATCH = "PATCH";
+
+    /**
+     * @var string
+     */
     public const REQUEST_DELETE = "DELETE";
 
     public function __construct(protected GophrRequest $request)

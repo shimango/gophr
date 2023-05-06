@@ -17,31 +17,11 @@ use Psr\Http\Message\StreamInterface;
 class GophrRequest implements GophrRequestInterface
 {
     /**
-     * A valid API Key token
-    */
-    protected string $apiKey;
-
-    /**
-     * The API version to use ("v2", "beta")
-    */
-    protected string $apiVersion;
-
-    /**
-     * The base url to call
-     */
-    protected string $baseUrl;
-
-    /**
-     * The endpoint to call
-     */
-    protected string $endpoint;
-
-    /**
      * An array of headers to send with the request
      *
      * @var array(string => string)
      */
-    protected array $headers;
+    protected array $headers = [];
 
     /**
      * The body of the request (optional)
@@ -65,16 +45,6 @@ class GophrRequest implements GophrRequestInterface
     protected int $timeout;
 
     /**
-     * The proxy port to use. Null to disable
-     */
-    protected ?int $proxyPort;
-
-    /**
-     * Whether SSL verification should be used for proxy requests
-     */
-    protected bool $proxyVerifySSL;
-
-    /**
      * Request options to decide if Guzzle Client should throw exceptions when http code is 4xx or 5xx
      */
     protected bool $http_errors;
@@ -90,36 +60,40 @@ class GophrRequest implements GophrRequestInterface
      * @param bool $proxyVerifySSL Whether the proxy requests should perform SSL verification
      * @throws GophrException when no access token is provided
      */
-    public function __construct(string $endpoint, string $apiKey, string $baseUrl, string $apiVersion, ?int $proxyPort = null, bool $proxyVerifySSL = false)
+    public function __construct(/**
+     * The endpoint to call
+     */
+    protected string $endpoint, /**
+     * A valid API Key token
+     */
+    protected string $apiKey, /**
+     * The base url to call
+     */
+    protected string $baseUrl, /**
+     * The API version to use ("v2", "beta")
+     */
+    protected string $apiVersion, /**
+     * The proxy port to use. Null to disable
+     */
+    protected ?int $proxyPort = null, /**
+     * Whether SSL verification should be used for proxy requests
+     */
+    protected bool $proxyVerifySSL = false)
     {
-        $this->endpoint = $endpoint;
-        $this->apiKey = $apiKey;
         $this->http_errors = true;
 
         if (!$this->apiKey) {
             throw new RequestException("No API Key has been provided");
         }
-
-        $this->baseUrl = $baseUrl;
-        $this->apiVersion = $apiVersion;
         $this->timeout = 100;
         $this->headers = $this->getDefaultHeaders();
-        $this->proxyPort = $proxyPort;
-        $this->proxyVerifySSL = $proxyVerifySSL;
     }
 
-    /**
-     * @return string
-     */
     public function getEndpoint(): string
     {
         return $this->endpoint;
     }
 
-    /**
-     * @param string $endpoint
-     * @return GophrRequest
-     */
     public function setEndpoint(string $endpoint): GophrRequest
     {
         $new = clone $this;
@@ -129,8 +103,6 @@ class GophrRequest implements GophrRequestInterface
 
     /**
      * Gets the Base URL the request is made to
-     *
-     * @return string
      */
     public function getBaseUrl(): string
     {
@@ -139,8 +111,6 @@ class GophrRequest implements GophrRequestInterface
 
     /**
      * Gets the API version in use for the request
-     *
-     * @return string
      */
     public function getApiVersion(): string
     {
@@ -181,7 +151,7 @@ class GophrRequest implements GophrRequestInterface
     public function setReturnType($returnClass): GophrRequest
     {
         if (!is_a($returnClass, AbstractGophrResponse::class, true)) {
-            throw new InvalidReturnTypeException("{$returnClass} must be an instance of AbstractGophrResponse");
+            throw new InvalidReturnTypeException(sprintf('%s must be an instance of AbstractGophrResponse', $returnClass));
         }
 
         $new = clone $this;
@@ -230,8 +200,9 @@ class GophrRequest implements GophrRequestInterface
         }
         // By default, JSON-encode
         else {
-            $new->requestBody = json_encode($obj);
+            $new->requestBody = json_encode($obj, JSON_THROW_ON_ERROR);
         }
+
         return $new;
     }
 
@@ -258,7 +229,6 @@ class GophrRequest implements GophrRequestInterface
 
     /**
      * Gets the timeout value of the request
-     * @return int
      */
     public function getTimeout(): int
     {
@@ -268,7 +238,6 @@ class GophrRequest implements GophrRequestInterface
     /**
      * Executes the HTTP request using Guzzle
      *
-     * @param string $requestType
      * @return mixed object or array of objects of class $returnType
      */
     public function execute(string $requestType): GophrResponseInterface
@@ -283,17 +252,17 @@ class GophrRequest implements GophrRequestInterface
                     'timeout' => $this->timeout
                 ]
             );
-        } catch(BadResponseException $ex) {
+        } catch(BadResponseException $badResponseException) {
             return ResponseFactory::makeGophrResponse(
-                $ex->getResponse()->getBody(),
+                $badResponseException->getResponse()->getBody(),
                 0,
                 [],
                 $this->returnType
-            )->withStatus($ex->getResponse()->getStatusCode(), $ex->getResponse()->getReasonPhrase());
-        } catch (GuzzleException $ex) {
+            )->withStatus($badResponseException->getResponse()->getStatusCode(), $badResponseException->getResponse()->getReasonPhrase());
+        } catch (GuzzleException $guzzleException) {
             return ResponseFactory::makeGophrResponse(
                 Utils::streamFor(''),
-                $ex->getCode(),
+                $guzzleException->getCode(),
                 [],
                 $this->returnType
             );

@@ -7,5 +7,5 @@ use Shimango\Gophr\DataTransferObjects\AbstractDataTransferObject;
 class ListParcelsDto extends AbstractDataTransferObject
 {
     /** @var \Shimango\Gophr\DataTransferObjects\Items\Response\Parcels\GetParcelDto[] */
-    public $parcels;
+    public $parcels = [];
 }

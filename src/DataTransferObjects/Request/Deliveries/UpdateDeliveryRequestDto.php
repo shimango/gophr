@@ -9,5 +9,6 @@ use Shimango\Gophr\DataTransferObjects\Pickups\PickupDto;
 class UpdateDeliveryRequestDto extends AbstractDataTransferObject
 {
     public PickupDto $pickup;
+
     public DropoffDto $dropoff;
 }

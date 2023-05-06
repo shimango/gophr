@@ -6,25 +6,25 @@ use Shimango\Gophr\DataTransferObjects\AbstractDataTransferObject;
 
 class DropoffDto extends AbstractDataTransferObject
 {
-    public ?int $min_required_age;
-    public ?string $dropoff_company_name;
-    public ?string $dropoff_address1;
-    public ?string $dropoff_address2;
-    public ?string $dropoff_city;
-    public ?string $dropoff_postcode;
-    public ?string $dropoff_country_code;
-    public ?string $dropoff_w3w;
-    public ?string $dropoff_location_lat;
-    public ?string $dropoff_location_lng;
-    public ?string $dropoff_tips_how_to_find;
-    public ?string $dropoff_person_name;
-    public ?string $dropoff_email;
-    public ?string $dropoff_mobile_number;
-    public ?string $dropoff_phone_number;
-    public ?string $dropoff_instructions;
-    public ?string $earliest_dropoff_time;
-    public ?string $dropoff_deadline;
-    public ?int $dropoff_proof_required;
-    public ?int $cold_chain;
-    public ?int $sequence_number;
+    public ?int $min_required_age = null;
+    public ?string $dropoff_company_name = null;
+    public ?string $dropoff_address1 = null;
+    public ?string $dropoff_address2 = null;
+    public ?string $dropoff_city = null;
+    public ?string $dropoff_postcode = null;
+    public ?string $dropoff_country_code = null;
+    public ?string $dropoff_w3w = null;
+    public ?string $dropoff_location_lat = null;
+    public ?string $dropoff_location_lng = null;
+    public ?string $dropoff_tips_how_to_find = null;
+    public ?string $dropoff_person_name = null;
+    public ?string $dropoff_email = null;
+    public ?string $dropoff_mobile_number = null;
+    public ?string $dropoff_phone_number = null;
+    public ?string $dropoff_instructions = null;
+    public ?string $earliest_dropoff_time = null;
+    public ?string $dropoff_deadline = null;
+    public ?int $dropoff_proof_required = null;
+    public ?int $cold_chain = null;
+    public ?int $sequence_number = null;
 }

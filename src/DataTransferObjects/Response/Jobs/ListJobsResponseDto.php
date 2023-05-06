@@ -10,6 +10,8 @@ use Shimango\Gophr\DataTransferObjects\Items\Response\Jobs\ListJobsDto;
 class ListJobsResponseDto extends AbstractDataTransferObject
 {
     public ?ListJobsDto $data = null;
+
     public ?Links $links = null;
+
     public ?Meta $meta = null;
 }

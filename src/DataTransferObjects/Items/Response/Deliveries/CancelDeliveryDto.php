@@ -7,5 +7,5 @@ use Shimango\Gophr\DataTransferObjects\Items\MoneyDto;
 
 class CancelDeliveryDto extends AbstractDataTransferObject
 {
-    public ?MoneyDto $cancelation_cost;
+    public ?MoneyDto $cancelation_cost = null;
 }

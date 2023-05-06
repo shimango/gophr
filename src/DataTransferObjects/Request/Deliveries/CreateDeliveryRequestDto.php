@@ -9,8 +9,9 @@ use Shimango\Gophr\DataTransferObjects\Pickups\PickupDto;
 class CreateDeliveryRequestDto extends AbstractDataTransferObject
 {
     public PickupDto $pickup;
+
     public DropoffDto $dropoff;
 
     /** @var \Shimango\Gophr\DataTransferObjects\Request\Parcels\CreateParcelRequestDto[] */
-    public $parcels;
+    public $parcels = [];
 }

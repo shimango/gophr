@@ -9,12 +9,11 @@ use Spatie\DataTransferObject\DataTransferObjectError;
 
 abstract class AbstractGophrResponse implements GophrResponseInterface
 {
-    private StreamInterface $body;
-    private array $headers;
-    private int $httpStatusCode;
     private string $reasonPhrase;
+
     private string $protocolVersion = '1.1';
-    protected ?AbstractDataTransferObject $object;
+
+    protected ?AbstractDataTransferObject $object = null;
     protected array $contentsArray;
 
     /**
@@ -23,11 +22,8 @@ abstract class AbstractGophrResponse implements GophrResponseInterface
      * @param int $httpStatusCode The returned status code
      * @param array $headers The returned headers
      */
-    public function __construct(StreamInterface $body, int $httpStatusCode, array $headers)
+    public function __construct(private StreamInterface $body, private int $httpStatusCode, private array $headers)
     {
-        $this->body = $body;
-        $this->httpStatusCode = $httpStatusCode;
-        $this->headers = $headers;
     }
 
     /**
@@ -91,14 +87,14 @@ abstract class AbstractGophrResponse implements GophrResponseInterface
         return is_array($headerLine) ? implode(',', $headerLine) : $headerLine;
     }
 
-    public function withHeader(string $name, array $value): GophrResponseInterface
+    public function withHeader(string $name, string|array $value): GophrResponseInterface
     {
         $new = clone $this;
         $new->headers[$name] = $value;
         return $new;
     }
 
-    public function withAddedHeader(string $name, array $value): GophrResponseInterface
+    public function withAddedHeader(string $name, string|array $value): GophrResponseInterface
     {
         $new = clone $this;
         $new->headers[$name] = array_merge($this->headers[$name], $value);
@@ -135,7 +131,7 @@ abstract class AbstractGophrResponse implements GophrResponseInterface
     public function getContentsArray(): array
     {
         if (!isset($this->contentsArray)) {
-            $this->contentsArray = json_decode($this->getBody()->getContents(), true) ?: [];
+            $this->contentsArray = json_decode($this->getBody()->getContents(), true, 512, JSON_THROW_ON_ERROR) ?: [];
         }
 
         return $this->contentsArray;
@@ -148,7 +144,7 @@ abstract class AbstractGophrResponse implements GophrResponseInterface
                 /** @var AbstractDataTransferObject object */
                 $object = new $className($this->getContentsArray());
                 $this->object = $object;
-            } catch (DataTransferObjectError $e) {
+            } catch (DataTransferObjectError) {
                 $this->object = null;
             }
         }

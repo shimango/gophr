@@ -22,7 +22,7 @@ class Delivery extends AbstractResource
      */
     public function createDelivery(string $jobId, array $deliveryData): CreateDeliveryResponse
     {
-        $apiEndPoint = $this->request->getEndpoint() . "/jobs/{$jobId}/deliveries" . $this->generateUrlParameters();
+        $apiEndPoint = $this->request->getEndpoint() . sprintf('/jobs/%s/deliveries', $jobId) . $this->generateUrlParameters();
         /** @var CreateDeliveryResponse $response */
         $response = $this->create($apiEndPoint, $deliveryData, CreateDeliveryResponse::class);
         return $response;
@@ -34,7 +34,7 @@ class Delivery extends AbstractResource
      */
     public function getDelivery(string $jobId, string $deliveryId): GetDeliveryResponse
     {
-        $apiEndPoint = $this->request->getEndpoint() . "/jobs/{$jobId}/deliveries/{$deliveryId}" . $this->generateUrlParameters();
+        $apiEndPoint = $this->request->getEndpoint() . sprintf('/jobs/%s/deliveries/%s', $jobId, $deliveryId) . $this->generateUrlParameters();
         /** @var GetDeliveryResponse $response */
         $response = $this->read($apiEndPoint, GetDeliveryResponse::class);
         return $response;
@@ -46,7 +46,7 @@ class Delivery extends AbstractResource
      */
     public function updateDelivery(string $jobId, string $deliveryId, array $deliveryData): UpdateDeliveryResponse
     {
-        $apiEndPoint = $this->request->getEndpoint() . "/jobs/{$jobId}/deliveries/{$deliveryId}" . $this->generateUrlParameters();
+        $apiEndPoint = $this->request->getEndpoint() . sprintf('/jobs/%s/deliveries/%s', $jobId, $deliveryId) . $this->generateUrlParameters();
         /** @var UpdateDeliveryResponse $response */
         $response = $this->update($apiEndPoint, $deliveryData, UpdateDeliveryResponse::class);
         return $response;
@@ -58,7 +58,7 @@ class Delivery extends AbstractResource
      */
     public function listDeliveries(string $jobId): ListDeliveriesResponse
     {
-        $apiEndPoint = $this->request->getEndpoint() . "/jobs/{$jobId}/deliveries" . $this->generateUrlParameters();
+        $apiEndPoint = $this->request->getEndpoint() . sprintf('/jobs/%s/deliveries', $jobId) . $this->generateUrlParameters();
         /** @var ListDeliveriesResponse $response */
         $response = $this->read($apiEndPoint, ListDeliveriesResponse::class);
         return $response;
@@ -70,7 +70,7 @@ class Delivery extends AbstractResource
      */
     public function cancelDelivery(string $jobId, string $deliveryId, array $deliveryData): CancelDeliveryResponse
     {
-        $apiEndPoint = $this->request->getEndpoint() . "/jobs/{$jobId}/deliveries/{$deliveryId}/cancel" . $this->generateUrlParameters();
+        $apiEndPoint = $this->request->getEndpoint() . sprintf('/jobs/%s/deliveries/%s/cancel', $jobId, $deliveryId) . $this->generateUrlParameters();
         /** @var CancelDeliveryResponse $response */
         $response = $this->create($apiEndPoint, $deliveryData, CancelDeliveryResponse::class);
         return $response;
@@ -83,7 +83,7 @@ class Delivery extends AbstractResource
      */
     public function progressDeliveryStatus(string $jobId, string $deliveryId): progressDeliveryStatusResponse
     {
-        $apiEndPoint = $this->request->getEndpoint() . "/jobs/{$jobId}/deliveries/{$deliveryId}/progress" . $this->generateUrlParameters();
+        $apiEndPoint = $this->request->getEndpoint() . sprintf('/jobs/%s/deliveries/%s/progress', $jobId, $deliveryId) . $this->generateUrlParameters();
         /** @var progressDeliveryStatusResponse $response */
         $response = $this->create($apiEndPoint, [],progressDeliveryStatusResponse::class);
         return $response;

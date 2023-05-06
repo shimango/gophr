@@ -35,7 +35,7 @@ class Job extends AbstractResource
      */
     public function getJob(string $jobId): GetJobResponse
     {
-        $apiEndPoint = $this->request->getEndpoint() . "/jobs/{$jobId}" . $this->generateUrlParameters();
+        $apiEndPoint = $this->request->getEndpoint() . sprintf('/jobs/%s', $jobId) . $this->generateUrlParameters();
         /** @var GetJobResponse $response */
         $response = $this->read($apiEndPoint, GetJobResponse::class);
         return $response;
@@ -47,7 +47,7 @@ class Job extends AbstractResource
      */
     public function updateJob(string $jobId, array $jobData): UpdateJobResponse
     {
-        $apiEndPoint = $this->request->getEndpoint() . "/jobs/{$jobId}" . $this->generateUrlParameters();
+        $apiEndPoint = $this->request->getEndpoint() . sprintf('/jobs/%s', $jobId) . $this->generateUrlParameters();
         /** @var UpdateJobResponse $response */
         $response = $this->update($apiEndPoint, $jobData, UpdateJobResponse::class);
         return $response;
@@ -59,7 +59,7 @@ class Job extends AbstractResource
      */
     public function CancelJob(string $jobId, array $jobData): CancelJobResponse
     {
-        $apiEndPoint = $this->request->getEndpoint() . "/jobs/{$jobId}/cancel" . $this->generateUrlParameters();
+        $apiEndPoint = $this->request->getEndpoint() . sprintf('/jobs/%s/cancel', $jobId) . $this->generateUrlParameters();
         /** @var CancelJobResponse $response */
         $response = $this->create($apiEndPoint, $jobData, CancelJobResponse::class);
         return $response;
