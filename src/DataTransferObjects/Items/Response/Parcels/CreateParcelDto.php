@@ -5,7 +5,7 @@ namespace Shimango\Gophr\DataTransferObjects\Items\Response\Parcels;
 use Shimango\Gophr\DataTransferObjects\AbstractDataTransferObject;
 use Shimango\Gophr\DataTransferObjects\Items\MoneyDto;
 
-final class CreateParcelDto extends AbstractDataTransferObject
+class CreateParcelDto extends AbstractDataTransferObject
 {
     public string $parcel_id;
 

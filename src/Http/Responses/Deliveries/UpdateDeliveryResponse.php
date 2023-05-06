@@ -5,7 +5,7 @@ namespace Shimango\Gophr\Http\Responses\Deliveries;
 use Shimango\Gophr\DataTransferObjects\Response\Deliveries\UpdateDeliveryResponseDto;
 use Shimango\Gophr\Http\AbstractGophrResponse;
 
-class UpdateDeliveryResponse extends AbstractGophrResponse
+final class UpdateDeliveryResponse extends AbstractGophrResponse
 {
     public function getContentsObject(): ?UpdateDeliveryResponseDto
     {

@@ -5,7 +5,7 @@ namespace Shimango\Gophr\DataTransferObjects;
 use Shimango\Gophr\Interfaces\DataTransferObjectInterface;
 use Spatie\DataTransferObject\DataTransferObject;
 
-final class AbstractDataTransferObject extends DataTransferObject implements DataTransferObjectInterface
+abstract class AbstractDataTransferObject extends DataTransferObject implements DataTransferObjectInterface
 {
     /**
      * @var string[]

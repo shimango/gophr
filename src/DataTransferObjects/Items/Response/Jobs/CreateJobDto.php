@@ -5,7 +5,7 @@ namespace Shimango\Gophr\DataTransferObjects\Items\Response\Jobs;
 use Shimango\Gophr\DataTransferObjects\AbstractDataTransferObject;
 use Shimango\Gophr\DataTransferObjects\Items\MoneyDto;
 
-final class CreateJobDto extends AbstractDataTransferObject
+class CreateJobDto extends AbstractDataTransferObject
 {
     public string $job_id;
 

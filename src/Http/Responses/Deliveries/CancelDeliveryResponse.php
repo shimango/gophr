@@ -5,7 +5,7 @@ namespace Shimango\Gophr\Http\Responses\Deliveries;
 use Shimango\Gophr\DataTransferObjects\Response\Deliveries\CancelDeliveryResponseDto;
 use Shimango\Gophr\Http\AbstractGophrResponse;
 
-class CancelDeliveryResponse extends AbstractGophrResponse
+final class CancelDeliveryResponse extends AbstractGophrResponse
 {
     public function getContentsObject(): ?CancelDeliveryResponseDto
     {

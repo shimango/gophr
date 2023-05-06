@@ -6,7 +6,7 @@ use Shimango\Gophr\DataTransferObjects\AbstractDataTransferObject;
 use Shimango\Gophr\DataTransferObjects\Dropoffs\DropoffDto;
 use Shimango\Gophr\DataTransferObjects\Pickups\PickupDto;
 
-final class CreateDeliveryDto extends AbstractDataTransferObject
+class CreateDeliveryDto extends AbstractDataTransferObject
 {
     public string $delivery_id;
 

@@ -14,40 +14,33 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Utils;
 use Psr\Http\Message\StreamInterface;
 
-class GophrRequest implements GophrRequestInterface
+final class GophrRequest implements GophrRequestInterface
 {
     /**
      * An array of headers to send with the request
      *
      * @var array(string => string)
      */
-    protected array $headers = [];
+    private array $headers = [];
 
     /**
      * The body of the request (optional)
      */
-    protected ?string $requestBody = null;
-
-
-    /**
-     * True if the response should be returned as
-     * a stream
-     */
-    protected bool $returnsStream;
+    private ?string $requestBody = null;
 
     /**
      * The return type to cast the response as
      *
      */
-    protected ?string $returnType = null;
+    private ?string $returnType = null;
 
 
-    protected int $timeout;
+    private int $timeout;
 
     /**
      * Request options to decide if Guzzle Client should throw exceptions when http code is 4xx or 5xx
      */
-    protected bool $http_errors = true;
+    private bool $http_errors = true;
 
     /**
      * Constructs a new Gophr Request object
@@ -245,7 +238,7 @@ class GophrRequest implements GophrRequestInterface
         $client = HttpClientFactory::makeGuzzleClient($this->baseUrl, $this->headers, $this->http_errors, $this->proxyVerifySSL, $this->proxyPort);
             $result = $client->request(
                 $requestType,
-                $this->getRequestUrl(),
+                $this->endpoint,
                 [
                     'body' => $this->requestBody,
                     'timeout' => $this->timeout
@@ -288,15 +281,5 @@ class GophrRequest implements GophrRequestInterface
             'Content-Type' => 'application/json',
             'API-KEY' => $this->apiKey
         ];
-    }
-
-    /**
-     * Get the concatenated request URL
-     *
-     * @return string request URL
-     */
-    private function getRequestUrl():string
-    {
-        return $this->endpoint;
     }
 }
