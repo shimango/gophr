@@ -1,5 +1,8 @@
 # Changelog
 
+### 1.0.10
+- Added support for local development using environment variables
+
 ### 1.0.9
 - Fixed wrong Xdebug session key
 
