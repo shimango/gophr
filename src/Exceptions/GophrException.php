@@ -2,13 +2,14 @@
 
 namespace Shimango\Gophr\Exceptions;
 
+use Stringable;
 use Exception;
 
 /**
  * Class GophrException
  * @package Shimango\Gophr\Exceptions
  */
-abstract class GophrException extends Exception implements \Stringable
+abstract class GophrException extends Exception implements Stringable
 {
     /**
      * Construct a new Gophr Exception handler
