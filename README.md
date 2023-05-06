@@ -25,7 +25,7 @@ Or add the following to your composer.json file for your project:
 ```json
 {
     "require": {
-        "shimango/gophr": "^1.0.10"
+        "shimango/gophr": "^2.0.0"
     }
 }
 ```
