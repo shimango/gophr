@@ -14,7 +14,7 @@ use Shimango\Gophr\Http\Responses\Parcels\UpdateParcelResponse;
  * can have many parcels.
  * @package Shimango\Gophr\Resources
  */
-class Parcel extends AbstractResource
+final class Parcel extends AbstractResource
 {
     /**
      * Creates a parcel

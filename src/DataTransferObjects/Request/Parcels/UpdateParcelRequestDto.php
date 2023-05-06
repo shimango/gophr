@@ -4,7 +4,7 @@ namespace Shimango\Gophr\DataTransferObjects\Request\Parcels;
 
 use Shimango\Gophr\DataTransferObjects\AbstractDataTransferObject;
 
-class UpdateParcelRequestDto extends AbstractDataTransferObject
+final class UpdateParcelRequestDto extends AbstractDataTransferObject
 {
     public ?string $parcel_external_id = null;
 

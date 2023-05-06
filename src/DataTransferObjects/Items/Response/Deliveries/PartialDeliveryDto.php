@@ -4,7 +4,7 @@ namespace Shimango\Gophr\DataTransferObjects\Items\Response\Deliveries;
 
 use Shimango\Gophr\DataTransferObjects\AbstractDataTransferObject;
 
-class PartialDeliveryDto extends AbstractDataTransferObject
+final class PartialDeliveryDto extends AbstractDataTransferObject
 {
     public string $delivery_id;
 

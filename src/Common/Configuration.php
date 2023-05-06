@@ -6,7 +6,7 @@ namespace Shimango\Gophr\Common;
   * @category Class
  * @package  Shimango\Gophr
  */
-class Configuration
+final class Configuration
 {
     /**
      * @var string
@@ -132,7 +132,7 @@ class Configuration
             return $restBaseUrlDevelopment;
         }
 
-        return $this->isSandbox() ? self::REST_BASE_URL_SANDBOX : self::REST_BASE_URL;
+        return $this->isSandbox ? self::REST_BASE_URL_SANDBOX : self::REST_BASE_URL;
     }
 
     /**
@@ -140,6 +140,6 @@ class Configuration
      */
     public function getApiEndPoint(): ?string
     {
-        return self::ENDPOINTS[$this->getApiVersion()] ?? null;
+        return self::ENDPOINTS[$this->apiVersion] ?? null;
     }
 }

@@ -24,7 +24,7 @@ use Shimango\Gophr\Http\Responses\Parcels\GetParcelResponse;
 use Shimango\Gophr\Http\Responses\Parcels\ListParcelsResponse;
 use Shimango\Gophr\Http\Responses\Parcels\UpdateParcelResponse;
 
-class Client
+final class Client
 {
     private ResourceFactory $resourceFactory;
 

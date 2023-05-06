@@ -15,7 +15,7 @@ use Shimango\Gophr\Http\Responses\Jobs\UpdateJobResponse;
  * A Job will have a pickup and many dropoffs.
  * @package Shimango\Gophr\Resources
  */
-class Job extends AbstractResource
+final class Job extends AbstractResource
 {
     /**
      * Creates a job

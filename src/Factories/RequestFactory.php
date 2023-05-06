@@ -6,7 +6,7 @@ use Shimango\Gophr\Common\Configuration;
 use Shimango\Gophr\Exceptions\GophrException;
 use Shimango\Gophr\Http\GophrRequest;
 
-class RequestFactory
+final class RequestFactory
 {
     /**
      * Makes a Gophr request

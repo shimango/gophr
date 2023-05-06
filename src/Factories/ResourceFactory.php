@@ -8,7 +8,7 @@ use Shimango\Gophr\Resources\Delivery;
 use Shimango\Gophr\Resources\Job;
 use Shimango\Gophr\Resources\Parcel;
 
-class ResourceFactory
+final class ResourceFactory
 {
     /**
      * Makes a Job resource

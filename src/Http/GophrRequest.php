@@ -209,7 +209,7 @@ class GophrRequest implements GophrRequestInterface
      * Get the body of the request
      * @return mixed request body of any type
      */
-    public function getBody()
+    public function getBody(): ?string
     {
         return $this->requestBody;
     }

@@ -4,7 +4,7 @@ namespace Shimango\Gophr\DataTransferObjects\Request\Jobs;
 
 use Shimango\Gophr\DataTransferObjects\AbstractDataTransferObject;
 
-class CreateJobRequestDto extends AbstractDataTransferObject
+final class CreateJobRequestDto extends AbstractDataTransferObject
 {
     public ?int $vehicle_type = null;
 

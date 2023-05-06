@@ -5,7 +5,7 @@ namespace Shimango\Gophr\Factories;
 use Shimango\Gophr\Http\AbstractGophrResponse;
 use Psr\Http\Message\StreamInterface;
 
-class ResponseFactory
+final class ResponseFactory
 {
     /**
      * Makes a Gophr request

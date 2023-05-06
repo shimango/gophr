@@ -4,7 +4,7 @@ namespace Shimango\Gophr\DataTransferObjects\Pickups;
 
 use Shimango\Gophr\DataTransferObjects\AbstractDataTransferObject;
 
-class PickupDto extends AbstractDataTransferObject
+final class PickupDto extends AbstractDataTransferObject
 {
     public ?string $earliest_pickup_time = null;
 

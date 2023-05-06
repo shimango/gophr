@@ -14,7 +14,7 @@ use Shimango\Gophr\Http\Responses\Deliveries\UpdateDeliveryResponse;
  * A delivery represents a specific pickup / dropoff combination. A delivery can have many parcels and belongs to a job.
  * @package Shimango\Gophr\Resources
  */
-class Delivery extends AbstractResource
+final class Delivery extends AbstractResource
 {
     /**
      * Creates delivery

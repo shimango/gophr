@@ -4,7 +4,7 @@ namespace Shimango\Gophr\DataTransferObjects\Dropoffs;
 
 use Shimango\Gophr\DataTransferObjects\AbstractDataTransferObject;
 
-class DropoffDto extends AbstractDataTransferObject
+final class DropoffDto extends AbstractDataTransferObject
 {
     public ?int $min_required_age = null;
 

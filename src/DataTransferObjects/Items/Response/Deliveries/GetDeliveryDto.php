@@ -2,6 +2,6 @@
 
 namespace Shimango\Gophr\DataTransferObjects\Items\Response\Deliveries;
 
-class GetDeliveryDto extends CreateDeliveryDto
+final class GetDeliveryDto extends CreateDeliveryDto
 {
 }

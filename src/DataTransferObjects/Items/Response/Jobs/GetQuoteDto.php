@@ -5,7 +5,7 @@ namespace Shimango\Gophr\DataTransferObjects\Items\Response\Jobs;
 use Shimango\Gophr\DataTransferObjects\AbstractDataTransferObject;
 use Shimango\Gophr\DataTransferObjects\Items\MoneyDto;
 
-class GetQuoteDto extends AbstractDataTransferObject
+final class GetQuoteDto extends AbstractDataTransferObject
 {
     public ?int $job_priority = null;
 
