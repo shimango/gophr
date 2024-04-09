@@ -1,12 +1,13 @@
 <?php
 
 namespace Shimango\Gophr\Tests\Unit\Base;
+
 use DateTimeInterface;
 
 class Payloads
 {
-	public const MULTI_JOB_TYPE_MASTER_MULTI_DROP = 112;
-	
+    public const MULTI_JOB_TYPE_MASTER_MULTI_DROP = 112;
+
     private static function getParcelExternalId(bool $increment = false): string
     {
         static $parcel_external_id = 1;
@@ -83,7 +84,20 @@ class Payloads
     {
         $defaultValues = [
             "pickup" => self::getDeliveryPickup(),
-            "dropoff" => self::getDeliveryDropoff(['sequence_number' => self::getSequenceNumber(true)]),
+            "dropoff" => self::getDeliveryDropoff([
+                'sequence_number' => self::getSequenceNumber(true),
+                "dropoff_address1" => "10 Downing Street",
+                "dropoff_address2" => "Flat 10",
+                "dropoff_city" => "London",
+                "dropoff_postcode" => "SW1A 2AA",
+                "dropoff_country_code" => "GB",
+
+                "dropoff_location_lat" => "51.5" . rand(10000, 99999) . '',
+                "dropoff_location_lng" => "-0.0" . rand(10000, 99999) . '',
+                "dropoff_tips_how_to_find" => "Take junction 5 off the M1.",
+                "dropoff_person_name" => "Jane Doe",
+                "dropoff_email" => "bozo@test.com",
+            ]),
             "parcels" => [
                 self::getCreateParcelPayload()
             ]
@@ -141,15 +155,15 @@ class Payloads
         $defaultValues = [
             "earliest_pickup_time" => (new \DateTime('tomorrow noon'))->format(DateTimeInterface::ATOM),
             "pickup_deadline" => (new \DateTime('tomorrow noon'))->add(new \DateInterval('PT2H'))->format(DateTimeInterface::ATOM),
-            "pickup_address1" => "Riverside Building, County Hall",
+            "pickup_address1" => "1-4 Pope Street",
             "pickup_city" => "London",
-            "pickup_postcode" => "SE1 7PB",
+            "pickup_postcode" => "SE1 3PR",
             "pickup_country_code" => "GB",
-            "pickup_location_lat" => "51.503292",
-            "pickup_location_lng" => "-0.119540",
-            "pickup_company_name" => "Pickup2 QA Nastassia",
+            "pickup_location_lat" => "51.4997819",
+            "pickup_location_lng" => "-0.0784133",
+            "pickup_company_name" => "Gophr Ltd",
             "pickup_person_name" => "John Smith",
-            "pickup_email" => "qa@testqa.com",
+            "pickup_email" => "john.smith@gophr.com",
             "pickup_mobile_number" => "07711111112",
             "pickup_phone_number" => "07722222232",
             "pickup_proof_required" => 1,
@@ -167,16 +181,16 @@ class Payloads
     {
         $defaultValues = [
             "min_required_age" => 0,
-            "dropoff_company_name" => "Inglis3",
-            "dropoff_address1" => "Riverside Building, County Hall",
+            "dropoff_company_name" => "Private Investigators",
+            "dropoff_address1" => "221b Baker St",
             "dropoff_city" => "London",
-            "dropoff_postcode" => "SE1 7PB",
+            "dropoff_postcode" => "NW1 6XE",
             "dropoff_country_code" => "GB",
-            "dropoff_location_lat" => "51.502044",
-            "dropoff_location_lng" => "-0.119548",
-            "dropoff_tips_how_to_find" => "M1.",
-            "dropoff_person_name" => "Inglis Inglis Inglis",
-            "dropoff_email" => "jnglis@test.com",
+            "dropoff_location_lat" => "51.50092776208073",
+            "dropoff_location_lng" => "-0.0690546250761002",
+            "dropoff_tips_how_to_find" => "It's elementary my dear Watson",
+            "dropoff_person_name" => "Sherlock Holmes",
+            "dropoff_email" => "sherlok.holmer@gohr.com",
             "dropoff_mobile_number" => "07766663666",
             "dropoff_phone_number" => "07735555555",
             "earliest_dropoff_time" => (new \DateTime('tomorrow noon'))->add(new \DateInterval('PT2H'))->format(DateTimeInterface::ATOM),
@@ -202,21 +216,17 @@ class Payloads
             "pickup_proof_required" => 1,
             "earliest_pickup_time" => (new \DateTime('tomorrow noon'))->format(DateTimeInterface::ATOM),
             "pickup_deadline" => (new \DateTime('tomorrow noon'))->add(new \DateInterval('PT2H'))->format(DateTimeInterface::ATOM),
-            "pickup_address1" => "Riverside Building, County Hall",
-            "pickup_address2" => "Flat 6",
+            "pickup_address1" => "1-4 Pope Street",
             "pickup_city" => "London",
-            "pickup_postcode" => "SE1 7PB",
+            "pickup_postcode" => "SE1 3PR",
             "pickup_country_code" => "GB",
-            "pickup_w3w" => "///hats.shield.inner",
-            "pickup_location_lat" => "51.49984405907038",
-            "pickup_location_lng" => "-0.07826540963867426",
-            "pickup_company_name" => "Gophr",
-            "pickup_tips_how_to_find" => "New housing estate. Follow signs.",
+            "pickup_location_lat" => "51.4997819",
+            "pickup_location_lng" => "-0.0784133",
+            "pickup_company_name" => "Gophr Ltd",
             "pickup_person_name" => "John Smith",
-            "pickup_email" => "john@test.com",
+            "pickup_email" => "john.smith@gophr.com",
             "pickup_mobile_number" => "07711111112",
             "pickup_phone_number" => "07722222232",
-            "pickup_instructions" => "Doorbell doesn't work. Please knock door."
         ];
 
         return array_merge($defaultValues, $customValues);
@@ -227,21 +237,20 @@ class Payloads
         $defaultValues = [
             "dropoff_proof_required" => 1,
             "min_required_age" => 0,
-            "dropoff_company_name" => "Gophr",
-            "dropoff_address1" => "233 Burton Road",
-            "dropoff_address2" => "Flat 6",
+
+            "dropoff_company_name" => "The Firm",
+            "dropoff_address1" => "Buckingham Palace",
             "dropoff_city" => "London",
             "dropoff_postcode" => "SW1A 1AA",
             "dropoff_country_code" => "GB",
-            "dropoff_w3w" => "///hats.shield.inner",
-            "dropoff_location_lat" => "51.49984405907038",
-            "dropoff_location_lng" => "-0.07826540963867426",
-            "dropoff_tips_how_to_find" => "Take junction 5 off the M1.",
-            "dropoff_person_name" => "Jane Doe",
-            "dropoff_email" => "jane@test.com",
+            "dropoff_location_lat" => "51.501476",
+            "dropoff_location_lng" => "-0.140634",
+            "dropoff_tips_how_to_find" => "Follow the gards",
+            "dropoff_person_name" => "Betty",
+            "dropoff_email" => "elizabeth@gophr.com",
             "dropoff_mobile_number" => "07766666666",
             "dropoff_phone_number" => "07755555555",
-            "dropoff_instructions" => "Please leave at front door.",
+            "dropoff_instructions" => "Please leave at the gate",
             "earliest_dropoff_time" => (new \DateTime('tomorrow noon'))->add(new \DateInterval('PT4H'))->format(DateTimeInterface::ATOM),
             "dropoff_deadline" => (new \DateTime('tomorrow noon'))->add(new \DateInterval('PT5H'))->format(DateTimeInterface::ATOM),
             "cold_chain" => 60,
