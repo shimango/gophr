@@ -26,7 +26,7 @@ A comprehensive PHP client for the Gophr Courier Service API, enabling seamless 
 
 ## Requirements
 
-- PHP 7.4 or higher
+- PHP 8.0 or higher
 - Composer
 - A Gophr API key (obtain from [Gophr Authorization](https://developers.gophr.com/docs/authorisation))
 
@@ -126,10 +126,10 @@ A **Delivery** consists of:
 **Parcels** are the individual packages within a delivery. A delivery can contain multiple parcels.
 
 ### Workflow
-1. Create a Job
-2. Add one or more Deliveries to the Job
-3. Add Parcels to each Delivery
-4. Confirm the Job to dispatch the courier
+1. Create a Job with a pickup, deliveries, and parcels. This can be done in two ways:
+    - **All at once**: Create and confirm the Job in one go.
+    - **As a draft**: Create the Job as a draft and edit it (e.g., add/remove/edit deliveries and parcels) until it is ready to be confirmed.
+2. Confirm the Job to dispatch the courier.
 
 **Note:** Once a job is confirmed, deliveries and parcels cannot be modified.
 
@@ -147,44 +147,63 @@ $config = new Configuration('YOUR_API_KEY', true); // Sandbox mode
 $gophr = new Client($config);
 
 $jobData = [
-    'pickup' => [
-        'address' => [
-            'line_1' => '123 Pickup Street',
-            'line_2' => 'Suite 100',
-            'city' => 'London',
-            'postcode' => 'SW1A 1AA',
-            'country' => 'GB'
+    'external_id' => '2112',
+    'is_confirmed' => 1,
+    'pickups' => [
+        [
+            'earliest_pickup_time' => '2026-08-12T06:17:00+00:00',
+            'pickup_deadline' => '2026-08-12T07:13:00+00:00',
+            'pickup_address1' => '221B Baker Street',
+            'pickup_city' => 'London',
+            'pickup_postcode' => 'NW1 6TS',
+            'pickup_country_code' => 'GB',
+            'pickup_company_name' => 'Elementary Investigations',
+            'pickup_person_name' => 'Sherlock Holmes',
+            'pickup_email' => 'itiselementary@test.com',
+            'pickup_mobile_number' => '07700000000',
+            'parcels' => [
+                [
+                    'parcel_external_id' => '001',
+                    'parcel_reference_number' => '0fc35278-60a1-4fb3-9791-4f45c492e120',
+                    'parcel_description' => 'Sunglasses',
+                    'width' => 10,
+                    'length' => 15,
+                    'height' => 5,
+                    'weight' => 0.5,
+                ],
+                [
+                    'parcel_external_id' => '002',
+                    'parcel_reference_number' => '0fc35278-60a1-4fb3-9791-4f45c492e120',
+                    'parcel_description' => 'Folding chair',
+                    'width' => 50,
+                    'length' => 80,
+                    'height' => 5,
+                    'weight' => 1.5,
+                ],
+            ],
         ],
-        'contact' => [
-            'name' => 'John Sender',
-            'phone' => '+44 20 7123 4567',
-            'email' => 'sender@example.com'
-        ]
     ],
     'dropoffs' => [
         [
-            'address' => [
-                'line_1' => '456 Delivery Road',
-                'city' => 'London',
-                'postcode' => 'EC1A 1BB',
-                'country' => 'GB'
-            ],
-            'contact' => [
-                'name' => 'Jane Receiver',
-                'phone' => '+44 20 7987 6543',
-                'email' => 'receiver@example.com'
-            ],
+            'dropoff_company_name' => 'The Prime Minister\'s Office',
+            'dropoff_address1' => '10 Downing Street',
+            'dropoff_city' => 'London',
+            'dropoff_postcode' => 'SW1A 0AA',
+            'dropoff_country_code' => 'GB',
+            'dropoff_person_name' => 'The prime minister',
+            'dropoff_email' => 'pm@test.com',
+            'dropoff_mobile_number' => '07588000000',
+            'dropoff_deadline' => '2026-08-12T08:00:00+00:00',
             'parcels' => [
                 [
-                    'description' => 'Documents',
-                    'weight' => 0.5,
-                    'length' => 30,
-                    'width' => 20,
-                    'height' => 2
-                ]
-            ]
-        ]
-    ]
+                    'parcel_external_id' => '001',
+                ],
+                [
+                    'parcel_external_id' => '002',
+                ],
+            ],
+        ],
+    ],
 ];
 
 $response = $gophr->createJob($jobData);
@@ -257,29 +276,48 @@ $jobId = 'job_abc123';
 
 $deliveryData = [
     'pickup' => [
-        'address' => [
-            'line_1' => '789 Warehouse Lane',
-            'city' => 'London',
-            'postcode' => 'SE1 9SG',
-            'country' => 'GB'
-        ],
-        'contact' => [
-            'name' => 'Warehouse Manager',
-            'phone' => '+44 20 7111 2222'
-        ]
+        'earliest_pickup_time' => '2026-08-12T06:17:00+00:00',
+        'pickup_deadline' => '2026-08-12T07:13:00+00:00',
+        'pickup_address1' => '221B Baker Street',
+        'pickup_city' => 'London',
+        'pickup_postcode' => 'NW1 6TS',
+        'pickup_country_code' => 'GB',
+        'pickup_company_name' => 'Gophr',
+        'pickup_person_name' => 'John Smith',
+        'pickup_email' => 'john@test.com',
+        'pickup_mobile_number' => '07700000000',
     ],
     'dropoff' => [
-        'address' => [
-            'line_1' => '321 Customer Avenue',
-            'city' => 'London',
-            'postcode' => 'N1 9AG',
-            'country' => 'GB'
+        'dropoff_company_name' => 'Buckingham Palace',
+        'dropoff_address1' => 'Buckingham Palace',
+        'dropoff_city' => 'London',
+        'dropoff_postcode' => 'SW1A 1AA',
+        'dropoff_country_code' => 'GB',
+        'dropoff_person_name' => 'The Royal Household',
+        'dropoff_email' => 'yourmajesty@test.com',
+        'dropoff_mobile_number' => '07700000000',
+        'dropoff_deadline' => '2026-08-12T08:00:00+00:00',
+    ],
+    'parcels' => [
+        [
+            'parcel_external_id' => '003',
+            'parcel_reference_number' => '0fc35278-60a1-4fb3-9791-4f45c492e120',
+            'parcel_description' => 'Sunglass',
+            'width' => 10,
+            'length' => 15,
+            'height' => 5,
+            'weight' => 0.5,
         ],
-        'contact' => [
-            'name' => 'Customer Name',
-            'phone' => '+44 20 7333 4444'
-        ]
-    ]
+        [
+            'parcel_external_id' => '004',
+            'parcel_reference_number' => '0fc35278-60a1-4fb3-9791-4f45c492e120',
+            'parcel_description' => 'Folding chair',
+            'width' => 50,
+            'length' => 80,
+            'height' => 5,
+            'weight' => 1.5,
+        ],
+    ],
 ];
 
 $response = $gophr->createDelivery($jobId, $deliveryData);
@@ -308,9 +346,7 @@ $deliveryId = 'delivery_xyz789';
 
 $updateData = [
     'dropoff' => [
-        'contact' => [
-            'phone' => '+44 20 7999 8888'  // Update contact phone
-        ]
+        'dropoff_phone_number' => '+44 20 7999 8888'  // Update contact phone
     ]
 ];
 
@@ -354,13 +390,13 @@ $jobId = 'job_abc123';
 $deliveryId = 'delivery_xyz789';
 
 $parcelData = [
+    'parcel_external_id' => '005',
     'description' => 'Electronics',
     'weight' => 2.5,        // kg
     'length' => 40,         // cm
     'width' => 30,          // cm
     'height' => 20,         // cm
-    'value' => 150.00,      // GBP
-    'fragile' => true
+    'is_fragile' => 1
 ];
 
 $response = $gophr->createParcel($jobId, $deliveryId, $parcelData);
@@ -391,7 +427,7 @@ $parcelId = 'parcel_def456';
 
 $updateData = [
     'weight' => 3.0,  // Update weight
-    'fragile' => false
+    'is_not_rotatable' => 1 // Mark as non-rotatable
 ];
 
 $response = $gophr->updateParcel($jobId, $deliveryId, $parcelId, $updateData);
@@ -520,111 +556,6 @@ try {
         echo "Validation errors:\n";
         print_r($errors['errors']);
     }
-}
-```
-
-## Using Resource Classes
-
-Instead of using the main `Client` class, you can use individual resource classes for better organization:
-
-```php
-use Shimango\Gophr\Resources\Job;
-use Shimango\Gophr\Resources\Delivery;
-use Shimango\Gophr\Resources\Parcel;
-use Shimango\Gophr\Common\Configuration;
-
-$config = new Configuration('YOUR_API_KEY');
-
-// Using Job resource
-$jobResource = new Job($config);
-$jobs = $jobResource->listJobs(1, 10);
-
-// Using Delivery resource
-$deliveryResource = new Delivery($config);
-$delivery = $deliveryResource->getDelivery('job_id', 'delivery_id');
-
-// Using Parcel resource
-$parcelResource = new Parcel($config);
-$parcels = $parcelResource->listParcels('job_id', 'delivery_id');
-```
-
-## Complete Workflow Example
-
-Here's a complete example showing the typical workflow from job creation to confirmation:
-
-```php
-<?php
-require_once 'vendor/autoload.php';
-
-use Shimango\Gophr\Client;
-use Shimango\Gophr\Common\Configuration;
-
-$config = new Configuration('YOUR_API_KEY', true);
-$gophr = new Client($config);
-
-try {
-    // Step 1: Create a job
-    $jobData = [
-        'pickup' => [
-            'address' => [
-                'line_1' => '123 Main St',
-                'city' => 'London',
-                'postcode' => 'SW1A 1AA',
-                'country' => 'GB'
-            ],
-            'contact' => [
-                'name' => 'Shop Manager',
-                'phone' => '+44 20 7123 4567'
-            ]
-        ],
-        'dropoffs' => [
-            [
-                'address' => [
-                    'line_1' => '456 Oak Ave',
-                    'city' => 'London',
-                    'postcode' => 'EC1A 1BB',
-                    'country' => 'GB'
-                ],
-                'contact' => [
-                    'name' => 'Customer',
-                    'phone' => '+44 20 7987 6543'
-                ]
-            ]
-        ]
-    ];
-    
-    $jobResponse = $gophr->createJob($jobData);
-    $job = $jobResponse->getContentsObject();
-    echo "✓ Created Job: {$job->id}\n";
-    
-    // Step 2: Add a parcel to the delivery
-    $deliveryId = $job->deliveries[0]->id;
-    
-    $parcelData = [
-        'description' => 'Package',
-        'weight' => 1.5,
-        'length' => 30,
-        'width' => 20,
-        'height' => 10
-    ];
-    
-    $parcelResponse = $gophr->createParcel($job->id, $deliveryId, $parcelData);
-    $parcel = $parcelResponse->getContentsObject();
-    echo "✓ Added Parcel: {$parcel->id}\n";
-    
-    // Step 3: Confirm the job to dispatch courier
-    $confirmData = ['status' => 'confirmed'];
-    $confirmResponse = $gophr->updateJob($job->id, $confirmData);
-    $confirmedJob = $confirmResponse->getContentsObject();
-    echo "✓ Job confirmed! Status: {$confirmedJob->status}\n";
-    
-    // Step 4: Track the job
-    $trackResponse = $gophr->getJob($job->id);
-    $trackedJob = $trackResponse->getContentsObject();
-    echo "✓ Current status: {$trackedJob->status}\n";
-    
-} catch (\Exception $e) {
-    echo "✗ Error: " . $e->getMessage() . "\n";
 }
 ```
 
