@@ -1,5 +1,8 @@
 # Changelog
 
+### 2.0.3
+- Added booking method to the requests
+
 ### 2.0.2
 - Added missing properties to Job Dto
 
