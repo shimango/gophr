@@ -31,6 +31,6 @@ class HttpClientFactoryTest extends BaseTest
         $this->assertTrue(method_exists($httpClient, 'getConfig')); // method is deprecated
 
         $this->assertTrue($httpClient->getConfig('verify'));
-        $this->assertEquals($config->getProxyPort(), $httpClient->getConfig('proxy'));
+        $this->assertEquals('http://localhost:2112', $httpClient->getConfig('proxy'));
     }
 }

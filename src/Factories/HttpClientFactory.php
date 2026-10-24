@@ -21,10 +21,10 @@ final class HttpClientFactory
 
         if ($proxyPort !== null) {
             $clientSettings['verify'] = $proxyVerifySSL;
-            $clientSettings['proxy'] = $proxyPort;
+            $clientSettings['proxy'] = sprintf('http://localhost:%d', $proxyPort);
         }
 
-        if (extension_loaded('curl') && defined('CURL_VERSION_HTTP2') && (curl_version()["features"] & CURL_VERSION_HTTP2 !== 0)) {
+        if (extension_loaded('curl') === true && defined('CURL_VERSION_HTTP2') === true && (curl_version()["features"] & CURL_VERSION_HTTP2) !== 0) {
 
             // Enable HTTP/2 if curl lib exists and supports it
             $clientSettings['version'] = '2';

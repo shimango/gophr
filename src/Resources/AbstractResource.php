@@ -42,7 +42,11 @@ abstract class AbstractResource
      */
     public function create(string $endPoint, array $body, ?string $dtoResponseClass = null): AbstractGophrResponse
     {
-        $body['meta_data']['booking_method'] ??= 'shimango';
+        $metaDataKeys = array_column($body['meta_data'] ?? [], 'key');
+        if (in_array('booking_method', $metaDataKeys, true) === false) {
+            $body['meta_data'][] = ['key' => 'booking_method', 'value' => 'shimango'];
+        }
+
         return $this->gophrRequest->setEndpoint($endPoint)->attachBody($body)->setReturnType($dtoResponseClass)->execute(self::REQUEST_POST);
     }
 
