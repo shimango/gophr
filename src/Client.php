@@ -8,6 +8,7 @@ use Shimango\Gophr\Exceptions\InvalidReturnTypeException;
 use Shimango\Gophr\Factories\ResourceFactory;
 use Shimango\Gophr\Http\Responses\Deliveries\CancelDeliveryResponse;
 use Shimango\Gophr\Http\Responses\Deliveries\CreateDeliveryResponse;
+use Shimango\Gophr\Http\Responses\Deliveries\GenerateLabelResponse;
 use Shimango\Gophr\Http\Responses\Deliveries\GetDeliveryResponse;
 use Shimango\Gophr\Http\Responses\Deliveries\ListDeliveriesResponse;
 use Shimango\Gophr\Http\Responses\Deliveries\ProgressDeliveryStatusResponse;
@@ -159,6 +160,18 @@ final class Client
     public function cancelDelivery(string $jobId, string $deliveryId, array $deliveryData): CancelDeliveryResponse
     {
         return $this->resourceFactory->makeDeliveryResource($this->configuration)->cancelDelivery($jobId, $deliveryId, $deliveryData);
+    }
+
+    /**
+     * Generates a label for a delivery and returns its download URL
+     * @param string $jobId The id of the parent job
+     * @param string $deliveryId The id of the delivery
+     * @param array $labelData The label options, e.g. ['label_size' => 'small']
+     * @throws GophrException
+     */
+    public function generateLabel(string $jobId, string $deliveryId, array $labelData = []): GenerateLabelResponse
+    {
+        return $this->resourceFactory->makeDeliveryResource($this->configuration)->generateLabel($jobId, $deliveryId, $labelData);
     }
 
     /**

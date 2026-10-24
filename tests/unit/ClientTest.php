@@ -4,6 +4,7 @@ namespace Shimango\Gophr\Tests\Unit;
 use Shimango\Gophr\Exceptions\GophrException;
 use Shimango\Gophr\Http\Responses\Deliveries\CancelDeliveryResponse;
 use Shimango\Gophr\Http\Responses\Deliveries\CreateDeliveryResponse;
+use Shimango\Gophr\Http\Responses\Deliveries\GenerateLabelResponse;
 use Shimango\Gophr\Http\Responses\Deliveries\GetDeliveryResponse;
 use Shimango\Gophr\Http\Responses\Deliveries\ListDeliveriesResponse;
 use Shimango\Gophr\Http\Responses\Deliveries\ProgressDeliveryStatusResponse;
@@ -187,6 +188,20 @@ class ClientTest extends BaseTest
         $client = $this->getClientForDeliveryTest('create', ProgressDeliveryStatusResponse::class, "/v2-commercial-api/jobs/{$jobId}/deliveries/{$deliveryId}/progress");
         $response = $client->progressDeliveryStatus($jobId, $deliveryId);
         $this->assertInstanceOf(ProgressDeliveryStatusResponse::class, $response);
+    }
+
+    /**
+     * @return void
+     * @throws GophrException
+     */
+    public function testGenerateLabel(): void
+    {
+        $jobId = '12ab3c';
+        $deliveryId = 'def456';
+        $labelData = ['label_size' => 'small'];
+        $client = $this->getClientForDeliveryTest('create', GenerateLabelResponse::class, "/v2-commercial-api/jobs/{$jobId}/deliveries/{$deliveryId}/label", $labelData);
+        $response = $client->generateLabel($jobId, $deliveryId, $labelData);
+        $this->assertInstanceOf(GenerateLabelResponse::class, $response);
     }
 
     /** ************************************************************************************************************* */

@@ -151,7 +151,8 @@ abstract class AbstractGophrResponse implements GophrResponseInterface
     public function getContentsArray(): array
     {
         if (!isset($this->contentsArray)) {
-            $this->contentsArray = json_decode($this->stream->getContents(), true, 512, JSON_THROW_ON_ERROR) ?: [];
+            $contents = json_decode($this->stream->getContents(), true);
+            $this->contentsArray = is_array($contents) === true ? $contents : [];
         }
 
         return $this->contentsArray;

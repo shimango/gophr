@@ -6,9 +6,9 @@ use ReflectionClass;
 use ReflectionNamedType;
 use ReflectionProperty;
 use Shimango\Gophr\Interfaces\DataTransferObjectInterface;
-use Spatie\DataTransferObject\DataTransferObject;
+use Spatie\DataTransferObject\FlexibleDataTransferObject;
 
-abstract class AbstractDataTransferObject extends DataTransferObject implements DataTransferObjectInterface
+abstract class AbstractDataTransferObject extends FlexibleDataTransferObject implements DataTransferObjectInterface
 {
     public function __construct(array $parameters = [])
     {

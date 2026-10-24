@@ -6,7 +6,7 @@ use Shimango\Gophr\DataTransferObjects\AbstractDataTransferObject;
 
 final class MoneyDto extends AbstractDataTransferObject
 {
-    public float $amount;
+    public ?float $amount = null;
 
-    public string $currency;
+    public ?string $currency = null;
 }
