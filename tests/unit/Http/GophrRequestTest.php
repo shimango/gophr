@@ -19,7 +19,6 @@ class GophrRequestTest extends BaseTest
         $this->assertEquals('v2', $request->getApiVersion());
 
         $defaultHeaders = [
-            'Host' => Constants::REST_BASE_URL,
             'Content-Type' => 'application/json',
             'API-KEY' => Constants::API_KEY,
         ];

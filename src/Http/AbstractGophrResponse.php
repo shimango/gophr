@@ -9,7 +9,7 @@ use Spatie\DataTransferObject\DataTransferObjectError;
 
 abstract class AbstractGophrResponse implements GophrResponseInterface
 {
-    private string $reasonPhrase;
+    private string $reasonPhrase = '';
 
     private string $protocolVersion = '1.1';
 
@@ -68,45 +68,64 @@ abstract class AbstractGophrResponse implements GophrResponseInterface
 
     public function hasHeader(string $name): bool
     {
-        return isset($this->headers[$name]) ?? false;
+        return $this->findHeaderName($name) !== null;
     }
 
     public function getHeader(string $name): array
     {
-        $value = $this->headers[$name] ?? null;
+        $headerName = $this->findHeaderName($name);
 
-        if (is_null($value)) {
+        if ($headerName === null) {
             return [];
         }
 
-        return is_array($value) ? $value : [$value];
+        $value = $this->headers[$headerName];
+        return is_array($value) === true ? $value : [$value];
     }
 
     public function getHeaderLine(string $name): string
     {
-        $headerLine = $this->headers[$name] ?? '';
-        return is_array($headerLine) ? implode(',', $headerLine) : $headerLine;
+        return implode(',', $this->getHeader($name));
     }
 
     public function withHeader(string $name, string|array $value): GophrResponseInterface
     {
-        $new = clone $this;
+        $new = $this->withoutHeader($name);
         $new->headers[$name] = $value;
         return $new;
     }
 
     public function withAddedHeader(string $name, string|array $value): GophrResponseInterface
     {
+        $headerName = $this->findHeaderName($name) ?? $name;
+        $addedValues = is_array($value) === true ? $value : [$value];
+
         $new = clone $this;
-        $new->headers[$name] = array_merge($this->headers[$name], $value);
+        $new->headers[$headerName] = array_merge($this->getHeader($name), $addedValues);
         return $new;
     }
 
     public function withoutHeader(string $name): GophrResponseInterface
     {
         $new = clone $this;
-        unset($new->headers[$name]);
+
+        $headerName = $this->findHeaderName($name);
+        if ($headerName !== null) {
+            unset($new->headers[$headerName]);
+        }
+
         return $new;
+    }
+
+    private function findHeaderName(string $name): ?string
+    {
+        foreach (array_keys($this->headers) as $headerName) {
+            if (strcasecmp((string)$headerName, $name) === 0) {
+                return $headerName;
+            }
+        }
+
+        return null;
     }
 
     public function withBody(StreamInterface $stream): GophrResponseInterface
@@ -132,7 +151,8 @@ abstract class AbstractGophrResponse implements GophrResponseInterface
     public function getContentsArray(): array
     {
         if (!isset($this->contentsArray)) {
-            $this->contentsArray = json_decode($this->stream->getContents(), true, 512, JSON_THROW_ON_ERROR) ?: [];
+            $contents = json_decode($this->stream->getContents(), true);
+            $this->contentsArray = is_array($contents) === true ? $contents : [];
         }
 
         return $this->contentsArray;

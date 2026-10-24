@@ -5,6 +5,7 @@ namespace Shimango\Gophr\Resources;
 use Shimango\Gophr\Exceptions\InvalidReturnTypeException;
 use Shimango\Gophr\Http\Responses\Deliveries\CancelDeliveryResponse;
 use Shimango\Gophr\Http\Responses\Deliveries\CreateDeliveryResponse;
+use Shimango\Gophr\Http\Responses\Deliveries\GenerateLabelResponse;
 use Shimango\Gophr\Http\Responses\Deliveries\GetDeliveryResponse;
 use Shimango\Gophr\Http\Responses\Deliveries\ListDeliveriesResponse;
 use Shimango\Gophr\Http\Responses\Deliveries\ProgressDeliveryStatusResponse;
@@ -73,6 +74,18 @@ final class Delivery extends AbstractResource
         $apiEndPoint = $this->gophrRequest->getEndpoint() . sprintf('/jobs/%s/deliveries/%s/cancel', $jobId, $deliveryId) . $this->generateUrlParameters();
         /** @var CancelDeliveryResponse $response */
         $response = $this->create($apiEndPoint, $deliveryData, CancelDeliveryResponse::class);
+        return $response;
+    }
+
+    /**
+     * Generates a label for a delivery
+     * @throws InvalidReturnTypeException
+     */
+    public function generateLabel(string $jobId, string $deliveryId, array $labelData): GenerateLabelResponse
+    {
+        $apiEndPoint = $this->gophrRequest->getEndpoint() . sprintf('/jobs/%s/deliveries/%s/label', $jobId, $deliveryId) . $this->generateUrlParameters();
+        /** @var GenerateLabelResponse $response */
+        $response = $this->create($apiEndPoint, $labelData, GenerateLabelResponse::class);
         return $response;
     }
 

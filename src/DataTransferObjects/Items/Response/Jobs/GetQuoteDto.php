@@ -11,15 +11,17 @@ final class GetQuoteDto extends AbstractDataTransferObject
 
     public ?int $vehicle_type = null;
 
-    public MoneyDto $price_net;
+    public ?MoneyDto $price_net = null;
 
-    public MoneyDto $price_gross;
+    public ?MoneyDto $price_gross = null;
 
     public ?string $pickup_eta = null;
 
     public ?string $delivery_eta = null;
 
-    public ?int $min_realistic_time = null;
+    public ?float $min_realistic_time = null;
+
+    public ?int $average_delivery_time = null;
 
     public ?float $distance = null;
 }

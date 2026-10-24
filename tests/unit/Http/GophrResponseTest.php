@@ -136,6 +136,40 @@ class GophrResponseTest extends BaseTest
         $this->assertSame($mockNewBody, $response1->getBody());
     }
 
+    public function testHeaderLookupIsCaseInsensitive(): void
+    {
+        /** @var StreamInterface $mockBody */
+        $mockBody = $this->mockFactory->getMockedObject(Stream::class);
+
+        $response = new GophrResponse($mockBody, 200, ['Content-Type' => ['application/json']]);
+
+        $this->assertTrue($response->hasHeader('content-type'));
+        $this->assertEquals(['application/json'], $response->getHeader('CONTENT-TYPE'));
+        $this->assertEquals('application/json', $response->getHeaderLine('content-type'));
+        $this->assertFalse($response->withoutHeader('content-type')->hasHeader('Content-Type'));
+        $this->assertEquals(['text/plain'], $response->withHeader('content-type', ['text/plain'])->getHeader('Content-Type'));
+    }
+
+    public function testWithAddedHeaderAddsANewHeader(): void
+    {
+        /** @var StreamInterface $mockBody */
+        $mockBody = $this->mockFactory->getMockedObject(Stream::class);
+
+        $response = new GophrResponse($mockBody, 200, ['dogs' => 'Bytor']);
+
+        $this->assertEquals(['Snow dog'], $response->withAddedHeader('cats', 'Snow dog')->getHeader('cats'));
+        $this->assertEquals('Bytor,Snow dog', $response->withAddedHeader('Dogs', 'Snow dog')->getHeaderLine('dogs'));
+    }
+
+    public function testReasonPhraseIsEmptyByDefault(): void
+    {
+        /** @var StreamInterface $mockBody */
+        $mockBody = $this->mockFactory->getMockedObject(Stream::class);
+
+        $response = new GophrResponse($mockBody, 200, []);
+        $this->assertSame('', $response->getReasonPhrase());
+    }
+
     public function testgetContentsObjectIsNullByDefault(): void
     {
         /** @var StreamInterface $mockBody */

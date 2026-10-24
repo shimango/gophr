@@ -17,7 +17,9 @@ class CreateParcelDto extends AbstractDataTransferObject
 
     public ?string $parcel_description = null;
 
-    public MoneyDto $parcel_insurance_value;
+    public ?string $dangerous_goods = null;
+
+    public ?MoneyDto $parcel_insurance_value = null;
 
     public ?string $barcode_reference = null;
 
@@ -50,4 +52,8 @@ class CreateParcelDto extends AbstractDataTransferObject
     public ?int $is_beef = null;
 
     public ?int $is_pork = null;
+
+    public ?int $is_medical = null;
+
+    public ?int $min_required_age = null;
 }

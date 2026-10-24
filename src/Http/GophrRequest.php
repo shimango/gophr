@@ -277,7 +277,6 @@ final class GophrRequest implements GophrRequestInterface
     private function getDefaultHeaders(): array
     {
         return [
-            'Host' => $this->baseUrl,
             'Content-Type' => 'application/json',
             'API-KEY' => $this->apiKey
         ];

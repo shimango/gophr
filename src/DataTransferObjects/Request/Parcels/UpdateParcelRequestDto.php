@@ -12,6 +12,8 @@ final class UpdateParcelRequestDto extends AbstractDataTransferObject
 
     public ?string $parcel_description = null;
 
+    public ?string $dangerous_goods = null;
+
     public ?float $parcel_insurance_value = null;
 
     public ?float $width = null;

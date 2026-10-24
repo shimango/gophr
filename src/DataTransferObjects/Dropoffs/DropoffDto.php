@@ -48,5 +48,13 @@ final class DropoffDto extends AbstractDataTransferObject
 
     public ?int $sequence_number = null;
 
+    public ?int $pin_required = null;
+
+    public ?string $fallback_handover_method = null;
+
+    public ?string $safe_place_location = null;
+
+    public ?string $leave_safe_instructions = null;
+
     public $parcels = [];
 }

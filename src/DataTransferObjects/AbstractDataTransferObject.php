@@ -2,23 +2,26 @@
 
 namespace Shimango\Gophr\DataTransferObjects;
 
+use ReflectionClass;
+use ReflectionNamedType;
+use ReflectionProperty;
 use Shimango\Gophr\Interfaces\DataTransferObjectInterface;
-use Spatie\DataTransferObject\DataTransferObject;
+use Spatie\DataTransferObject\FlexibleDataTransferObject;
 
-abstract class AbstractDataTransferObject extends DataTransferObject implements DataTransferObjectInterface
+abstract class AbstractDataTransferObject extends FlexibleDataTransferObject implements DataTransferObjectInterface
 {
-    /**
-     * @var string[]
-     */
-    private const FLOAT_FIELDS = [
-        'amount', 'distance'
-    ];
-
     public function __construct(array $parameters = [])
     {
-        foreach (self::FLOAT_FIELDS as $floatField) {
-            if (isset($parameters[$floatField]) && is_int($parameters[$floatField])) {
-                $parameters[$floatField] = (float)$parameters[$floatField];
+        foreach ((new ReflectionClass($this))->getProperties(ReflectionProperty::IS_PUBLIC) as $property) {
+            $type = $property->getType();
+            $name = $property->getName();
+
+            if ($type instanceof ReflectionNamedType === false || $type->getName() !== 'float') {
+                continue;
+            }
+
+            if (is_int($parameters[$name] ?? null) === true) {
+                $parameters[$name] = (float)$parameters[$name];
             }
         }
 
